@@ -1,0 +1,9 @@
+<div class="play-by-play" >
+  <h3>Play by Play</h3>
+  <mat-list>
+    <mat-list-item *ngFor="let gameEvent of gameEvents | async">
+      <span class="game-time">{{gameEvent.timestampSeconds | secondsToHms}}</span>
+      <span class="game-event">{{gameEvent.message}} <span class='{{gameEvent.scoringPlayerTeam}}'>{{gameEvent.scoringPlayerName}}</span></span>
+    </mat-list-item>
+  </mat-list>
+</div>

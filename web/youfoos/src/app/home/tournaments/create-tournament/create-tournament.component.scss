@@ -1,0 +1,79 @@
+/* TODO Clean up this CSS */
+
+.create-tournament-component {
+  margin-top: 48px;
+  display: block;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+mat-form-field {
+  margin-top: 8px;
+}
+
+mat-radio-button {
+  margin: 8px;
+}
+
+.view-select {
+  margin-top: 16px;
+  display: block;
+}
+
+.tournament {
+  display: block;
+}
+
+.submit-button {
+  display: block;
+  margin-top: 16px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 150px;
+}
+
+.form-row {
+  display: block;
+}
+
+.tournament-start-date-picker, .tournament-end-date-picker {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.player-count {
+  display: inline-block;
+  max-width: 200px;
+  margin: 0 auto 8px 8px;
+}
+
+.game-type {
+  display: inline-block;
+  position: relative;
+  bottom: 2px;
+  margin: 8px 16px 8px 4px;
+}
+
+.tournament-name {
+  width: 100%;
+  max-width: 320px;
+}
+
+.tournament-description {
+  display: block;
+  max-width: 600px;
+  margin: 0 auto;
+
+  textarea {
+    min-height: 4rem;
+    max-height: 10rem;
+  }
+
+  span {
+    color: red;
+    font-size: 0.9em;
+  }
+}

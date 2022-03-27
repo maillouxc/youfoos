@@ -1,0 +1,10 @@
+<mat-icon class="search-icon">search</mat-icon>
+<mat-form-field class="search-field">
+  <input type="text" matInput placeholder="Search users" [formControl]="searchTextControl" [matAutocomplete]="auto">
+</mat-form-field>
+
+<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayWith" (optionsScroll)="onScroll()">
+  <mat-option *ngFor="let user of searchResults$ | async" [value]="user" (click)="onClick(user)">
+    <img src="{{ user.avatar }}" height="24"/>&nbsp;<span>{{user.name}}</span>
+  </mat-option>
+</mat-autocomplete>

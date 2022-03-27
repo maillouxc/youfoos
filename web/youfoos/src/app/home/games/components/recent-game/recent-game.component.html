@@ -1,0 +1,89 @@
+<mat-card *ngIf="recentGame$ | async as recentGame">
+  <div class="game">
+    <div class="black-team">
+      <div class="black-player center-vertical" [ngClass]="{
+        'no-bar' : !recentGame.game.isDoubles && recentGame.winner === 'Black' ,
+        'black-bar' : recentGame.winner !== 'Black' }">
+        <img (click)="goToUserProfile(recentGame.game.blackOffenseUserId)"
+             *ngIf="recentGame.blackOffensePlayer" class="black-img"
+             src="{{recentGame.blackOffensePlayer.avatar}}">
+        <div class="player-info">
+          <p (click)="goToUserProfile(recentGame.game.blackOffenseUserId)"
+             *ngIf="recentGame.blackOffensePlayer"
+             class="name">{{recentGame.blackOffensePlayer.name }}</p>
+          <p *ngIf="recentGame.game.isDoubles" class="role">Offense</p>
+        </div>
+      </div>
+
+      <div *ngIf="recentGame.game.isDoubles" class="black-player center-vertical">
+        <img (click)="goToUserProfile(recentGame.game.blackDefenseUserId)"
+             *ngIf="recentGame.blackDefensePlayer" class="black-img"
+             src="{{recentGame.blackDefensePlayer.avatar}}">
+        <div class="player-info">
+          <p (click)="goToUserProfile(recentGame.game.blackDefenseUserId)"
+             *ngIf="recentGame.blackDefensePlayer"
+             class="name">{{recentGame.blackDefensePlayer.name}}</p>
+          <p class="role">Defense</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="center-vertical">
+      <img class="black-team-trophy"
+           src="../../../assets/images/icons/trophy.png"
+           *ngIf="recentGame.winner == 'Black'">
+    </div>
+
+    <div class="center-vertical ">
+      <div class="center-column">
+        <h3 class="game-number">Game {{recentGame.game.gameNumber}}</h3>
+        <a *ngIf="recentGame.game.tournamentId"
+           href="tournaments/{{recentGame.game.tournamentId}}">Tournament Game</a>
+        <div class="scoreboard">
+          <p class="black-score">{{recentGame.game.blackTeamScore}}</p>
+          <p class="gold-score">{{recentGame.game.goldTeamScore}}</p>
+        </div>
+
+        <p class="time">{{ recentGame.game.endTimeUtc | amTimeAgo }}</p>
+        <mat-icon class="expander" (click)="toggleEvents()" *ngIf="!showEvents">keyboard_arrow_down</mat-icon>
+        <mat-icon class="expander" (click)="toggleEvents()" *ngIf="showEvents">keyboard_arrow_up</mat-icon>
+      </div>
+    </div>
+
+    <div class="center-vertical">
+      <img class="gold-team-trophy"
+           src="../../../assets/images/icons/trophy.png"
+           *ngIf="recentGame.winner == 'Gold'">
+    </div>
+
+    <div class="gold-team">
+      <div class="gold-player center-vertical">
+        <div class="player-info">
+          <p (click)="goToUserProfile(recentGame.game.goldOffenseUserId)"
+             *ngIf="recentGame.goldOffensePlayer"
+             class="name">{{recentGame.goldOffensePlayer.name}}</p>
+          <p *ngIf="recentGame.game.isDoubles" class="role">Offense</p>
+        </div>
+        <img (click)="goToUserProfile(recentGame.game.goldOffenseUserId)"
+             *ngIf="recentGame.goldOffensePlayer" class="gold-img"
+             src="{{recentGame.goldOffensePlayer.avatar}}">
+      </div>
+
+      <div *ngIf="recentGame.game.isDoubles" class="gold-player center-vertical" [ngClass]="{
+        'no-bar' : recentGame.winner == 'Gold',
+        'gold-bar' : recentGame.winner !== 'Gold'}">
+        <div class="player-info">
+          <p (click)="goToUserProfile(recentGame.game.goldDefenseUserId)"
+             *ngIf="recentGame.goldDefensePlayer"
+             class="name">{{recentGame.goldDefensePlayer.name}}</p>
+          <p class="role">Defense</p>
+        </div>
+        <img (click)="goToUserProfile(recentGame.game.goldDefenseUserId)"
+             *ngIf="recentGame.goldDefensePlayer" class="gold-img"
+             src="{{recentGame.goldDefensePlayer.avatar}}">
+      </div>
+    </div>
+  </div>
+
+  <yf-game-events *ngIf="showEvents" [gameData]="recentGame$"></yf-game-events>
+</mat-card>

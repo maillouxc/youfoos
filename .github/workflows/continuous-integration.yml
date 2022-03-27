@@ -1,0 +1,35 @@
+name: Continuous Integration
+
+on:
+  pull_request:
+    branches:
+      - dev
+
+jobs:
+  backend-test:
+    name: Run all backend tests
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.101
+
+      - name: Ensure that all backend projects build successfully
+        run: dotnet build backend/YoufoosBackend.sln
+
+      - name: Run all API unit tests
+        run: dotnet test backend/Api.Tests
+
+      - name: Run all Game Events Service unit tests
+        run: dotnet test backend/Api.Tests
+
+      - name: Run all Statistics Service unit tests
+        run: dotnet test backend/StatisticsService.Tests
+
+      - name: Run all Statistics Service integration tests
+        run: dotnet test backend/StatisticsService.Tests.Integration

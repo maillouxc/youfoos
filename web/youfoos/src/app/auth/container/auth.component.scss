@@ -1,0 +1,18 @@
+#authWrapper {
+  background-image: url('../../../assets/images/backgrounds/grass_soccer_field.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+#authCard {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 8px black solid;
+}
+
+mat-card-title {
+  margin: 16px;
+}

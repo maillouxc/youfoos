@@ -1,0 +1,19 @@
+<div class="rfid-container">
+  <h1 mat-dialog-title align="center" class="rfid-title">Change RFID Number</h1>
+  <form id="changeRfidForms" [formGroup]="changeRfidForm" (ngSubmit)="onSubmit()">
+    <mat-dialog-content align="center" class ="changeRfidForms">
+      <mat-form-field id="password form-group textBox" class="password form-group textBox">
+        <input name="Rfid" formControlName="Rfid" matInput placeholder="New RFID Number" class="textBox" [ngClass]="{ 'is-invalid': submitted && f.Rfid.errors }">
+        <mat-error *ngIf="submitted && !!f.Rfid.errors" class="invalid-feedback">
+          <div *ngIf="!!f.Rfid.errors.required">Rfid is required</div>
+          <div *ngIf="!!f.Rfid.errors.pattern">Only Numbers</div>
+        </mat-error>
+      </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions align="center" class="buttons form-group" [formGroup]="changeRfidForm">
+      <button mat-button matDialogClose type="button" class="cancel-button" >Cancel</button>
+      <button mat-raised-button color="accent" type="submit" [disabled]="disabled" class="resetBtn">Change RFID Number</button>
+      <strong style="color:red; padding-top:10px;">{{ error }}</strong>
+    </mat-dialog-actions>
+  </form>
+</div>

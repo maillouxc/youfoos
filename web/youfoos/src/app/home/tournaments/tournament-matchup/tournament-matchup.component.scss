@@ -1,0 +1,67 @@
+mat-card {
+  width: 200px;
+  margin: 8px;
+  display: block;
+  padding: 0;
+}
+
+.player-name {
+  font-size: 0.8em;
+  margin: 0;
+  text-align: left;
+  padding-left: 8px;
+  cursor: pointer;
+}
+
+.name-placeholder {
+  font-size: 0.8em;
+  margin: 0;
+  text-align: left;
+  padding-left: 8px;
+  color: darkgray;
+}
+
+.player-name:hover {
+  color: #3186a7;
+}
+
+.gold-team {
+  border-right: 4px solid gold;
+  border-bottom: 0.25px solid gray;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.black-team {
+  border-right: 4px solid black;
+  border-top: 0.25px solid gray;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.game-outcome {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.join-mode {
+  display: block;
+}
+
+.gold-team-score, .black-team-score {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 8px;
+  display: inline;
+}
+
+.gold-team-trophy, .black-team-trophy {
+  width: 16px;
+  height: 16px;
+  right: 8px;
+  top: 2px;
+  position: relative;
+  display: inline;
+}

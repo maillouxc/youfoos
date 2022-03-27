@@ -1,0 +1,48 @@
+yf-tournament-matchup {
+  width: 300px;
+}
+
+h2 {
+  margin: 12px;
+  display: block;
+}
+
+.bracket {
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.tournament-start-date, .tournament-end-date, .tournament-date-separator {
+  display: inline-block;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.seeding {
+  color: darkblue;
+}
+
+.registration {
+  color: green;
+  font-size: 1.1em;
+  font-weight: 500;
+}
+
+.waiting-for-start-time {
+  color: darkgoldenrod;
+}
+
+.in-progress {
+  color: darkgreen;
+}
+
+.completed {
+  color: darkslategray;
+}
+
+.error {
+  color: red;
+}

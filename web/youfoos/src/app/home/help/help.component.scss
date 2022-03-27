@@ -1,0 +1,39 @@
+section {
+  margin: 0 auto;
+  max-width: 1200px;
+  min-width: 600px;
+  padding: 60px 24px;
+}
+
+.section-header {
+  text-align: center;
+  margin: 0 auto 32px auto;
+
+  h2 {
+    font-size: 24px;
+    margin: 0 auto 30px auto;
+    padding-bottom: 22px;
+    border-bottom: 4px solid orangered;
+    max-width: 400px;
+  }
+
+  P {
+    text-align: center;
+    font-weight: 400;
+    color: #797676;
+  }
+}
+
+mat-expansion-panel {
+  margin: 16px auto;
+  text-align: left;
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+mat-expansion-panel-header {
+  font-size: 16px;
+  font-weight: 500;
+}

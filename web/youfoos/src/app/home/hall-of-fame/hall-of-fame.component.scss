@@ -1,0 +1,59 @@
+.hall-of-fame-container {
+  margin: 0 auto;
+  max-width: 1400px;
+}
+
+yf-games-progress-bar {
+  margin: 16px 8px 0 8px;
+}
+
+mat-grid-list {
+  margin: 16px;
+}
+
+mat-card {
+  height: 140px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+.userAvatar {
+  height: 140px;
+  width: 140px;
+  display: inline-block;
+  cursor: pointer;
+  user-select: none;
+}
+
+.awardInfo {
+  display: inline-block;
+  margin: 0 auto;
+}
+
+.awardeeName {
+  margin: 8px;
+  text-align: center;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  color: #3186A7;
+  cursor: pointer;
+  font-size: 1.1em;
+}
+
+.positive-connotation {
+  border-right: 12px solid green;
+}
+
+.negative-connotation {
+  border-right: 12px solid red;
+}
+
+.neutral-connotation {
+  border-right: 12px solid grey;
+}
+
+.no-cursor {
+  cursor: context-menu
+}

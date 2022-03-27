@@ -1,0 +1,12 @@
+<h2>{{tournament.name}}</h2>
+<p class="tournament-start-date">{{tournament.startDate | date}}</p>
+<p class="tournament-date-separator">-</p>
+<p class="tournament-end-date">{{tournament.endDate | date}}</p>
+
+<p [ngClass]="tournamentStatusClass">{{tournamentStatus}}</p>
+
+<div class="bracket">
+  <div *ngFor="let round of tournament.rounds">
+    <yf-tournament-round [tournamentRound]="round"></yf-tournament-round>
+  </div>
+</div>

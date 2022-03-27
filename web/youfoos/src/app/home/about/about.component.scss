@@ -1,0 +1,28 @@
+.mat-card {
+  margin: 16px auto;
+  max-width: 1000px;
+}
+
+.version-tag {
+  color: gray;
+}
+
+mat-grid-list {
+  width: 75%;
+  max-width: 1000px;
+  margin: 32px auto;
+
+  mat-grid-tile {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  div {
+    width: 100%;
+    margin: 0 auto;
+
+    .contributor-name {
+      color: #3186A7;
+    }
+  }
+}

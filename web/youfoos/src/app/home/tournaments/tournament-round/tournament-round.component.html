@@ -1,0 +1,7 @@
+<div class="rounds" *ngIf="tournamentRound">
+  <h3>{{tournamentRound.name}}</h3>
+
+  <div *ngFor="let matchup of tournamentRound.matchups">
+    <yf-tournament-matchup [matchup]="matchup"></yf-tournament-matchup>
+  </div>
+</div>

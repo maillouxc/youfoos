@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Join Tournament</h2>
+<mat-dialog-content>
+  <p>Playing in a tournament requires a commitment of time to be there to play your games.</p>
+  <p>If you don't show up, you make things less fun for everyone else.</p>
+
+  <p>Are you sure you want to join this tournament?</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button color="warn" mat-dialog-close>Nevermind</button>
+  <button mat-button color="primary" (click)="onClickJoinTournament()">Sign Up</button>
+</mat-dialog-actions>

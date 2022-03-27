@@ -1,0 +1,43 @@
+<mat-card>
+  <div class="gold-team">
+    <div class="gold-team-names">
+      <p class="player-name" *ngIf="matchup.goldUser1Id"
+         (click)="goToProfile(matchup.goldUser1Id)">Chris</p>
+      <p class="name-placeholder" *ngIf="!matchup.goldUser1Id">---</p>
+
+      <p class="player-name"
+         *ngIf="matchup.gameType == allGameTypes.Doubles && matchup.goldUser2Id"
+         (click)="goToProfile(matchup.goldUser2Id)">Geoff McCarthy</p>
+      <p class="name-placeholder"
+         *ngIf="matchup.gameType == allGameTypes.Doubles && !matchup.goldUser1Id">---</p>
+    </div>
+    <div class="game-outcome">
+      <img class="gold-team-trophy"
+           src="../../../../assets/images/icons/trophy.png"
+           *ngIf="matchup.goldTeamScore == 5">
+      <p class="gold-team-score"
+         *ngIf="matchup.goldTeamScore">{{matchup.goldTeamScore}}</p>
+    </div>
+  </div>
+
+  <div class="black-team">
+    <div class="black-team-names">
+      <p class="player-name" (click)="goToProfile(matchup.blackUser1Id)"
+         *ngIf="matchup.blackUser1Id">Felix Lepa</p>
+      <p class="name-placeholder" *ngIf="!matchup.blackUser1Id">---</p>
+
+      <p class="player1-name"
+         *ngIf="matchup.gameType == allGameTypes.Doubles && matchup.blackUser2Id"
+         (click)="goToProfile(matchup.blackUser2Id)">Geoff McCarthy</p>
+      <p class="name-placeholder"
+         *ngIf="matchup.gameType == allGameTypes.Doubles && !matchup.blackUser2Id">---</p>
+    </div>
+    <div class="game-outcome">
+      <img class="black-team-trophy"
+           src="../../../../assets/images/icons/trophy.png"
+           *ngIf="matchup.blackTeamScore == 5">
+      <p class="black-team-score"
+         *ngIf="matchup.blackTeamScore">{{matchup.blackTeamScore}}</p>
+    </div>
+  </div>
+</mat-card>

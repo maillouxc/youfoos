@@ -1,0 +1,12 @@
+
+<h2 id="recent-games-text">Recent Games</h2>
+<hr class="recent-games-divider"/>
+
+<div *ngIf="recentGames$ | async; else loading">
+  <div *ngFor="let recentGame$ of recentGames$ | async">
+    <yf-recent-game [recentGame$]="recentGame$"></yf-recent-game>
+  </div>
+</div>
+<ng-template #loading>
+    <mat-spinner *ngIf="!loaded" class="center-vertical"></mat-spinner>
+</ng-template>

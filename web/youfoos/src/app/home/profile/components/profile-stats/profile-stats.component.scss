@@ -1,0 +1,119 @@
+h2 {
+  margin: 8px auto;
+  border-top: 2px solid blue;
+  padding-top: 16px;
+  width: 80%;
+}
+
+.winrates {
+  .sub-stat-value {
+    border-bottom: 1px dashed #3186A7;
+    font-weight: 500;
+  }
+}
+
+.team-play, .play-times, .scoring, .misc {
+  .sub-stat-value {
+    font-weight: 500;
+    color: black;
+  }
+}
+
+.winrates, .team-play, .play-times, .scoring, .misc {
+  margin: 16px;
+
+  .stat-holder {
+    margin: 8px;
+    display: inline-block;
+    width: 140px;
+  }
+
+  .stat-name, .stat-value {
+    display: block;
+    color: #484848;
+  }
+
+  .stat-name {
+    font-size: 1.1em;
+    margin: 8px;
+  }
+
+  .stat-value {
+    margin: 8px;
+    font-size: 2em;
+    font-weight: 500;
+  }
+}
+
+.play-times {
+  .stat-holder {
+    width: 160px;
+  }
+
+  .stat-value {
+    font-size: 1.4em;
+  }
+}
+
+.misc {
+  .stat-holder {
+    width: 160px;
+  }
+
+  .stat-value {
+    font-size: 1.4em;
+  }
+}
+
+.team-play {
+  .stat-holder {
+    width: 180px;
+  }
+
+  .stat-name {
+    font-weight: 400;
+    font-size: 1.1em;
+  }
+
+  .stat-value {
+    font-size: 1.3em;
+  }
+
+  .avatar {
+    width: 64px;
+    height: 64px;
+    cursor: pointer;
+  }
+
+  .player-name {
+    display: block;
+    font-weight: 500;
+    color: #3186A7;
+    cursor: pointer;
+  }
+
+  em {
+    display: block;
+    color: dimgrey;
+    font-weight: 400;
+    font-size: 0.9em;
+  }
+}
+
+.team-play-emptyview {
+  margin-bottom: 32px;
+}
+
+.scoring {
+  .stat-holder {
+    width: 130px;
+  }
+
+  .stat-value {
+    font-size: 1.3em;
+  }
+}
+
+.red {
+  color: darkred;
+}

@@ -1,0 +1,109 @@
+.search-container {
+  width: 80%;
+  max-width: 1400px;
+  margin: 16px auto 8px auto;
+  user-select: none;
+}
+
+yf-user-search {
+  width: 300px;
+  display: inline-block;
+}
+
+.leaderboard-table {
+  width: 90%;
+  max-width: 1400px;
+  margin: 8px auto;
+  table-layout: fixed;
+}
+
+.header-label {
+  font-size: 20px;
+  text-align: center;
+}
+
+.stat-value {
+  margin-left: auto;
+}
+
+table {
+  width: 100%;
+}
+
+.position-column {
+  max-width: 64px;
+  user-select: none;
+}
+
+.elo-column {
+  max-width: 64px;
+}
+
+.mat-column-gamesOverall,
+.mat-column-games1v1,
+.mat-column-games2v2 {
+  width: 20%;
+}
+
+.mat-column-goalsOverall,
+.mat-column-goals1v1,
+.mat-column-goals2v2 {
+  width: 20%;
+}
+
+.mat-column-time {
+  width: 24%;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+}
+
+.name-column {
+  div {
+    text-align: left;
+  }
+}
+
+.left-align {
+  text-align: left;
+}
+
+.selected-stat {
+  color: #ff5e00;
+  font-size: 16px;
+}
+
+.profile-name {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.search-field {
+  width: 100%;
+  max-width: 300px;
+  min-width: 120px;
+  margin-right: 16px;
+}
+
+.sort-by {
+  margin: 0 16px;
+}
+
+.ranking-dropdown {
+  width: 150px;
+  margin-right: 16px;
+}
+
+mat-radio-button {
+  margin: 0 8px;
+}
+
+.mat-list-item {
+  height: 32px;
+}
+

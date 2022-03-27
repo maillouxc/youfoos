@@ -1,0 +1,34 @@
+<mat-card-subtitle>Sign In</mat-card-subtitle>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="loginForms">
+  <mat-form-field class="form-group emailText">
+    <input id="emailInput" matInput placeholder="Email" formControlName="email"
+      [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+    <mat-error *ngIf="submitted && !!f.email.errors" class="invalid-feedback">
+      <div *ngIf="!!f.email.errors.required">Email is required</div>
+      <div *ngIf="!!f.email.errors.email">
+        Email must be a valid email address
+      </div>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="form-group passwordText">
+    <input id="passwordInput" matInput type="password" placeholder="Password" formControlName="password"
+      class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+      [type]="hide ? 'password' : 'text'" />
+    <mat-icon matSuffix (click)="hide = !hide">{{
+      hide ? 'visibility_off' : 'visibility'
+    }}</mat-icon>
+    <mat-error *ngIf="submitted && !!f.password.errors" class="invalid-feedback">
+      <div *ngIf="!!f.password.errors.required">Password is required</div>
+    </mat-error>
+  </mat-form-field>
+  <button [disabled]="disabled" id="loginButton" mat-raised-button color="primary" type="submit"
+    class="loginBtn form-group">
+    Login
+  </button>
+  <button [disabled]="!f.email.valid || disabled" mat-raised-button type="button" color="accent"
+    (click)="onClickForgotPassword()" class="forgotBtn form-group">
+    Forgot Password
+  </button>
+  <div *ngIf="error" class="errorMsg">Incorrect username or password.</div>
+</form>
+<a routerLink="../register" routerLinkActive="active">Create an Account</a>

@@ -1,0 +1,69 @@
+<mat-card-subtitle>Create Account</mat-card-subtitle>
+<form class="registerForms" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <mat-form-field class="awardeeName form-group">
+    <input id="name" matInput placeholder="First and last name" formControlName="name"
+      [ngClass]="{ 'is-invalid': submitted && f.name.errors }" pattern="[a-zA-Z ]*" />
+    <mat-error *ngIf="submitted && !!f.name.errors" class="invalid-feedback">
+      <div *ngIf="!!f.name.errors.required">First Name is required</div>
+      <div *ngIf="!!f.name.errors.maxlength">Max length 50 characters</div>
+      <div *ngIf="!!f.name.errors.pattern">Valid Characters [a-z, A-Z]</div>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="email form-group">
+    <input id="email" matInput placeholder="Email" formControlName="email"
+      [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+    <mat-error *ngIf="submitted && !!f.email.errors" class="invalid-feedback">
+      <div *ngIf="!!f.email.errors.required">Email is required</div>
+      <div *ngIf="!!f.email.errors.email">
+        Email must be a valid email address
+      </div>
+      <div *ngIf="error" class="alert alert-danger">Email is already used</div>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="rfid form-group">
+    <input id="rfid" formControlName="rfid" type="text" name="RfidNumber" matInput placeholder="RFID card number"
+      pattern="^[0-9]*$" [ngClass]="{ 'is-invalid': submitted && f.rfid.errors }"
+      matTooltip="Rfid Number can be found on your ID Card" />
+    <mat-error *ngIf="submitted && !!f.rfid.errors" class="invalid-feedback">
+      <div *ngIf="!!f.rfid.errors.required">RFID is required</div>
+      <div *ngIf="!!f.rfid.errors.pattern || !!f.rfid.errors.error">
+        Numbers only
+      </div>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="password form-group">
+    <input id="password" name="password" formControlName="password"
+      pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$" matInput placeholder="Password"
+      [type]="hide ? 'password' : 'text'" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+    <mat-icon matSuffix (click)="hide = !hide">{{
+      hide ? 'visibility_off' : 'visibility'
+    }}</mat-icon>
+    <mat-error *ngIf="submitted && !!f.password.errors" class="invalid-feedback">
+      <div *ngIf="!!f.password.errors.required">Password is required</div>
+      <div *ngIf="!!f.password.errors.minlength">
+        Password must be at least 8 characters
+      </div>
+      <div *ngIf="!!f.password.errors.pattern">
+        Password requirements: at least 1 capital letter, 1 lowercase letter and
+        1 digit
+      </div>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="confirm form-group">
+    <input id="confirm" formControlName="confirmPassword" name="confirmPassword" matInput placeholder="Confirm password"
+      [type]="hide ? 'password' : 'text'" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+    <mat-error *ngIf="submitted && !!f.confirmPassword.errors" class="invalid-feedback">
+      <div *ngIf="!!f.confirmPassword.errors.required">
+        Confirm Password is required
+      </div>
+      <div *ngIf="!!f.confirmPassword.errors.mustMatch">
+        Passwords must match
+      </div>
+    </mat-error>
+  </mat-form-field>
+  <button id="register" mat-raised-button color="accent" [disabled]="disabled" class="registerBtn">
+    Register
+  </button>
+  <div class="errorText" *ngIf="!!error">{{ error }}</div>
+</form>
+<a routerLink="../login" routerLinkActive="active">Already have an account?</a>

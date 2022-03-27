@@ -1,0 +1,25 @@
+<mat-card class="user-achievements" *ngIf="(userAchievements$ | async) as userAchievements">
+  <mat-card-title>Achievements</mat-card-title>
+  <div class="achievements-list">
+    <div class="achievement" *ngFor="let achievement of userAchievements">
+      <img class="achievement-icon" src="{{getImageForAchievement(achievement.name, achievement.unlockedDateTime)}}"/>
+      <div class="awardInfo">
+        <p class="achievement-title">{{achievement.name}}</p>
+        <h5 class="achievement-subtitle">{{achievement.description}}</h5>
+
+        <!-- Only show the progress bar if the achievement is in progress -->
+        <mat-progress-bar
+          *ngIf="achievement.progressPercent > 0 && !achievement.unlockedDateTime"
+          mode="determinate"
+          value="{{achievement.progressPercent}}">Hello</mat-progress-bar>
+
+        <!-- Display this view if progress on the achievement has not yet started -->
+        <p *ngIf="!achievement.unlockedDateTime && achievement.numQualifyingEvents == 0"
+           class="achievement-not-unlocked">Not yet unlocked.</p>
+
+        <!-- Only show the unlock date if the achievement is unlocked -->
+        <p class="achievement-unlock-date" *ngIf="achievement.unlockedDateTime">{{achievement.unlockedDateTime | date: 'MM/dd/yyyy'}}</p>
+      </div>
+    </div>
+  </div>
+</mat-card>

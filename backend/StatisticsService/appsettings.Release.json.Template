@@ -1,0 +1,32 @@
+﻿{
+  "RabbitMq": {
+    "ConnectionString": "TODO",
+    "QueueName": "StatsEvents"
+  },
+
+  "MongoDB": {
+    "ConnectionString": "TODO",
+    "Database": "YouFoos"
+  },
+
+  "Serilog": {
+    "MinimumLevel": "Information",
+    "WriteTo": [
+      {
+        "Name": "File",
+        "Args": {
+          "pathFormat": "logs/youfoos-stats-service-log-{Date}.log",
+          "fileSizeLimitBytes": 104857600,
+          "retainedFileCountLimit": 31,
+          "outputTemplate": "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level}] [{SourceContext}] [{EventId}] {Message}{NewLine}{Exception}"
+        }
+      },
+      {
+        "Name": "Console",
+        "Args": {
+          "outputTemplate": "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level}] [{SourceContext}] [{EventId}] {Message}{NewLine}{Exception}"
+        }
+      }
+    ]
+  }
+}

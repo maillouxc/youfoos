@@ -1,0 +1,34 @@
+.flex-grid {
+  display: flex;
+  justify-content: center;
+}
+
+.col {
+  flex: 1;
+}
+
+yf-profile-summary {
+  margin: 16px;
+  max-width: 300px;
+}
+
+yf-profile-stats {
+  margin: 16px;
+  max-width: 1000px;
+}
+
+.user-achievements-container {
+  width: 58%;
+  margin: 0 auto;
+}
+
+yf-profile-recent-games {
+  margin: 16px;
+  max-width: 300px;
+  display: block;
+}
+
+yf-user-achievements {
+  margin: 16px;
+  max-width: 300px;
+}

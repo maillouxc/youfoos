@@ -1,0 +1,6 @@
+<div *ngIf="showBar$ | async" class="alert alert-info alert-dismissable" [@simpleFadeAnimation]="'in'">
+  <div *ngIf="progressData$  | async as data" [@simpleFadeAnimation]="'in'"> Play {{ data.gamesNeeded }} more {{ data.gameWord }} to be eligible to appear on this page
+      <button type="button" class="btn-close" (click)="onDismiss()" data-dismiss="alert">×</button>
+    <mat-progress-bar color="warn" mode="determinate" value="{{ data.progress }}"></mat-progress-bar>
+  </div>
+</div>

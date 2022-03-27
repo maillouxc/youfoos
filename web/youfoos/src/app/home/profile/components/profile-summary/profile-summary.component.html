@@ -1,0 +1,18 @@
+<mat-card *ngIf="user$ | async as user">
+  <img src="{{user.avatar}}" class="avatar">
+
+  <h2 class="username">{{user.name}}</h2>
+
+  <p class="admin-status" *ngIf="user.isAdmin">Administrator</p>
+
+  <div class="join-date">
+    <strong>Player since:&ensp;</strong>
+    <span *ngIf="user">{{user.joinedTimestamp | date: 'MM/dd/yyyy'}}</span>
+  </div>
+
+  <div *ngIf="isCurrentUser">
+    <button mat-raised-button color="accent" (click)="openChangeAvatarDialog()">Change Avatar</button>
+    <button mat-raised-button (click)="openChangeRfidDialog()">Change RFID</button>
+    <button mat-raised-button color="primary" (click)="openChangePasswordDialog()">Change Password</button>
+  </div>
+</mat-card>

@@ -1,0 +1,134 @@
+﻿/* This is our custom stylesheet used to override the default Swagger UI styles. */
+/* Note that the default CSS in Swagger is a mess so we need to use !important a lot. */
+/* We also use a lot of really evil CSS hacks to change things since we cant mess with the Swagger HTML. */
+
+.models {
+    display: none !important;
+}
+
+.url {
+    display: none;
+}
+
+.swagger-ui .topbar {
+    background-color: #008013 !important;
+}
+
+.topbar-wrapper img {
+    content: url('custom-logo.png');
+}
+
+.main {
+    display: none !important;
+}
+
+.opblock-summary-description {
+    text-align: right !important;
+}
+
+.response-control-media-type {
+    display: none !important;
+}
+
+.response-col_links {
+    display: none !important;
+}
+
+.download-url-wrapper {
+    display: none !important;
+}
+
+.body-param-content-type {
+    display: none !important;
+}
+
+.swagger-ui .auth-btn-wrapper .btn-done {
+    display: none !important;
+}
+
+.swagger-ui .auth-container input[type=password], .swagger-ui .auth-container input[type=text] {
+    width: 500px !important;
+    margin: 16px auto 8px auto !important;
+    display: block !important;
+}
+
+.auth-container .wrapper label {
+    display: none !important;
+}
+
+.swagger-ui .dialog-ux .modal-ux-content p {
+    text-align: center !important;
+    display: block !important;
+}
+
+.wrapper {
+    position: relative !important;
+}
+
+.renderedMarkdown p {
+    margin: 0 auto 1em auto !important;
+}
+
+.response-controls {
+    display: none !important;
+}
+
+.model-example {
+    margin-bottom: 1em !important;
+}
+
+.execute-wrapper {
+    padding-top: 0 !important;
+}
+
+/* This is a super hacky evil way to get the login button moved where I want it. Not responsive at all.*/
+.scheme-container {
+    display: block !important;
+    position: relative !important;
+    top: -150px !important;
+    bottom: -160px !important;
+    background: none !important;
+    box-shadow: none !important;
+    margin-bottom: -130px !important;
+}
+
+.swagger-ui .dialog-ux .modal-ux-content h4 {
+    display: none !important;
+}
+
+/* 
+   Here's a weird hack - we can't modify the generated HTML from Swagger (at least, not easily),
+   so we have to change the text using CSS voodoo if we want any text to be different.
+   I'll put all of these types of hacks in this one section to avoid any confusion.
+*/
+.swagger-ui .dialog-ux .modal-ux-header h3 {
+    visibility: hidden !important;
+}
+
+.swagger-ui .dialog-ux .modal-ux-header h3:after {
+    content: 'Login to YouFoos API';
+    visibility: visible;
+    display: block;
+    position: absolute;
+    padding: 5px;
+    top: 8px;
+}
+
+.swagger-ui .btn.authorize span {
+    visibility: hidden !important;
+}
+
+.swagger-ui .btn.authorize span:after {
+    content: 'Login';
+    visibility: visible;
+    display: block;
+    position: absolute;
+    padding: 5px;
+    font-size: 1.3em;
+    top: 4px;
+    right: 90px;
+}
+
+/*
+    END WEIRD TEXT REPLACEMENT HACKS
+*/

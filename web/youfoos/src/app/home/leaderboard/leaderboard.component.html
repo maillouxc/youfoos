@@ -1,0 +1,226 @@
+<div class="search-container">
+  <yf-user-search (userSelected)="handleUserSelectedEvent($event)"></yf-user-search>
+
+  <span class="sort-by">Sort By</span>
+  <mat-form-field class="ranking-dropdown">
+    <mat-select [(value)]="sortBy" matNativeControl required>
+      <mat-option *ngFor="let option of currentSortOptions" [value]="option" (click)="loadData()">{{option}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-radio-group class="radio-buttons">
+    <mat-radio-button [checked]="true" value="Overall" (click)="changeLeaderboardStatType('Overall')">Overall</mat-radio-button>
+    <mat-radio-button value="1v1" (click)="changeLeaderboardStatType('1V1')">1v1</mat-radio-button>
+    <mat-radio-button value="2v2" (click)="changeLeaderboardStatType('2V2')">2v2</mat-radio-button>
+  </mat-radio-group>
+</div>
+
+<yf-games-progress-bar [gameType]="leaderboardType"></yf-games-progress-bar>
+
+<div class="leaderboard-table">
+
+  <!-- Leaderboard table -->
+  <table mat-table [dataSource]="dataSource">
+
+    <!-- Number Column -->
+    <ng-container matColumnDef="position" class="position-column">
+      <th mat-header-cell *matHeaderCellDef class="header-label">#</th>
+      <td mat-cell *matCellDef="let element">{{element.position}}</td>
+    </ng-container>
+
+    <!-- Avatar column -->
+    <ng-container matColumnDef="avatar" class="avatar-column">
+      <th mat-header-cell *matHeaderCellDef class="header-label">Player</th>
+      <td mat-cell *matCellDef="let element">
+        <img (click)="goToProfile(player.id)" *ngIf="element.player | async as player" class="avatar" src="{{player.avatar}}">
+      </td>
+    </ng-container>
+
+    <!-- Player name column -->
+    <ng-container matColumnDef="name" class="name-column">
+      <th mat-header-cell *matHeaderCellDef class="header-label"></th>
+      <td mat-cell *matCellDef="let element">
+        <div class="left-align">
+          <strong (click)="goToProfile(player.id)" class="profile-name" *ngIf="element.player | async as player" [class.selected-stat]="searchedPlayerName === player.name">{{ player.name }}</strong>
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- Overall Games Column -->
+    <ng-container matColumnDef="gamesOverall">
+      <th mat-header-cell *matHeaderCellDef class="header-label">Games</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-list>
+          <mat-list-item [class.selected-stat]="sortBy === 'Winrate'">
+            <span>Winrate</span>
+            <span class="stat-value">{{element.statData.statsOverall.winrate | percent}}</span>
+          </mat-list-item>
+          <mat-list-item [class.selected-stat]="sortBy === 'Games Played'">
+            <span>Played</span>
+            <span class="stat-value">{{element.statData.statsOverall.gamesWon + element.statData.statsOverall.gamesLost}}</span>
+          </mat-list-item>
+          <mat-list-item [class.selected-stat]="sortBy === 'Shutout Wins'">
+            <span>Shutout Wins</span>
+            <span class="stat-value">{{element.statData.statsOverall.shutoutWins}}</span>
+          </mat-list-item>
+        </mat-list>
+      </td>
+    </ng-container>
+
+    <!-- 1v1 Games Column -->
+    <ng-container matColumnDef="games1v1">
+      <th mat-header-cell *matHeaderCellDef class="header-label games-column" style="padding-right: 32px;">Games</th>
+      <td mat-cell *matCellDef="let element" style="padding-right: 24px;">
+        <mat-list class="games-column">
+          <mat-list-item [class.selected-stat]="sortBy === 'Winrate'">
+            <span>Winrate</span>
+            <span class="stat-value">{{element.statData.stats1V1.winrate | percent}}</span>
+          </mat-list-item>
+          <mat-list-item [class.selected-stat]="sortBy === 'Games Won'">
+            <span>Won</span>
+            <span class="stat-value">{{element.statData.stats1V1.gamesWon}}</span>
+          </mat-list-item>
+          <mat-list-item [class.selected-stat]="sortBy === 'Games Lost'">
+            <span>Lost</span>
+            <span class="stat-value">{{element.statData.stats1V1.gamesLost}}</span>
+          </mat-list-item>
+        </mat-list>
+      </td>
+    </ng-container>
+
+    <!-- 2v2 Games column -->
+    <ng-container matColumnDef="games2v2">
+      <th mat-header-cell *matHeaderCellDef class="header-label">Games</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-list>
+          <mat-list-item [class.selected-stat]="sortBy === 'Winrate'">
+            <span>Winrate</span>
+            <span class="stat-value">{{element.statData.stats2V2.winrate | percent}}</span>
+          </mat-list-item>
+          <mat-list-item [class.selected-stat]="sortBy === 'Games Won'">
+            <span>Won</span>
+            <span class="stat-value">{{element.statData.stats2V2.gamesWon}}</span>
+          </mat-list-item>
+          <mat-list-item [class.selected-stat]="sortBy === 'Games Lost'">
+            <span>Lost</span>
+            <span class="stat-value">{{element.statData.stats2V2.gamesLost}}</span>
+          </mat-list-item>
+        </mat-list>
+      </td>
+    </ng-container>
+
+    <!-- Overall Goals column -->
+    <ng-container matColumnDef="goalsOverall">
+      <th mat-header-cell *matHeaderCellDef class="header-label">Goals</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-list>
+          <mat-list-item [class.selected-stat]="sortBy === 'Goals Scored'">
+            <span>Scored</span>
+            <span class="stat-value">{{element.statData.statsOverall.goalsScored}}</span>
+          </mat-list-item>
+          <mat-list-item [class.selected-stat]="sortBy === 'Goals Allowed'">
+            <span>Allowed</span>
+            <span class="stat-value">{{element.statData.statsOverall.goalsAllowed}}</span>
+          </mat-list-item>
+          <mat-list-item [class.selected-stat]="sortBy === 'Owngoals'">
+            <span>Owngoals</span>
+            <span class="stat-value">{{element.statData.statsOverall.ownGoals}}</span>
+          </mat-list-item>
+        </mat-list>
+      </td>
+    </ng-container>
+
+    <!-- 1v1 Goals column -->
+    <ng-container matColumnDef="goals1v1">
+      <th mat-header-cell *matHeaderCellDef class="header-label">Goals</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-list>
+          <mat-list-item [class.selected-stat]="sortBy === 'Goals Scored'">
+            <span>Goals Scored</span>
+            <span class="stat-value">{{element.statData.stats1V1.goalsScored}}</span>
+          </mat-list-item>
+          <mat-list-item [class.selected-stat]="sortBy === 'Goals Allowed'">
+            <span>Goals Allowed</span>
+            <span class="stat-value">{{element.statData.stats1V1.goalsAllowed}}</span>
+          </mat-list-item>
+          <mat-list-item>
+            <span>Net Score</span>
+            <span class="stat-value">{{element.statData.stats1V1.goalsScored - element.statData.stats1V1.goalsAllowed}}</span>
+          </mat-list-item>
+        </mat-list>
+      </td>
+    </ng-container>
+
+    <!-- 2v2 Offense column -->
+    <ng-container matColumnDef="offense">
+      <th mat-header-cell *matHeaderCellDef class="header-label">Offense</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-list>
+          <mat-list-item [class.selected-stat]="sortBy === 'Offense Winrate'">
+            <span>Offense Winrate</span>
+            <span class="stat-value">{{element.statData.stats2V2.offenseWinrate | percent}}</span>
+          </mat-list-item>
+          <mat-list-item [class.selected-stat]="sortBy === 'Goals Scored as Offense'">
+            <span>Goals Scored</span>
+            <span class="stat-value">{{element.statData.stats2V2.goalsScoredAsOffense}}</span>
+          </mat-list-item>
+          <mat-list-item [class.selected-stat]="sortBy === 'Games as Offense'">
+            <span>Games as Offense</span>
+            <span class="stat-value">{{element.statData.stats2V2.gamesAsOffense}}</span>
+          </mat-list-item>
+        </mat-list>
+      </td>
+    </ng-container>
+
+    <!-- 2v2 Defense column -->
+    <ng-container matColumnDef="defense">
+      <th mat-header-cell *matHeaderCellDef class="header-label">Defense</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-list>
+          <mat-list-item [class.selected-stat]="sortBy === 'Defense Winrate'">
+            <span>Defense Winrate</span>
+            <span class="stat-value">{{element.statData.stats2V2.defenseWinrate | percent}}</span>
+          </mat-list-item>
+          <mat-list-item [class.selected-stat]="sortBy === 'Goals Scored as Defense'">
+            <span>Goals Scored</span>
+            <span class="stat-value">{{element.statData.stats2V2.goalsScoredAsDefense}}</span>
+          </mat-list-item>
+          <mat-list-item [class.selected-stat]="sortBy === 'Games as Defense'">
+            <span>Games as Defense</span>
+            <span class="stat-value">{{element.statData.stats2V2.gamesAsDefense}} </span>
+          </mat-list-item>
+        </mat-list>
+      </td>
+    </ng-container>
+
+    <!-- Overall time column -->
+    <ng-container matColumnDef="time">
+      <th mat-header-cell *matHeaderCellDef class="header-label">Time</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-list>
+          <mat-list-item [class.selected-stat]="sortBy === 'Time Played'">
+            <span>Time Played</span>
+            <span class="stat-value">{{element.statData.statsOverall.totalTimePlayedSecs | secondsToHms}}</span>
+          </mat-list-item>
+          <mat-list-item [class.selected-stat]="sortBy === 'Average Game Length'">
+            <span>Avg. Game Length</span>
+            <span class="stat-value">{{element.statData.statsOverall.averageGameLengthSecs | secondsToHms}}</span>
+          </mat-list-item>
+          <mat-list-item [class.selected-stat]="sortBy === 'Goals Per Minute'">
+            <span>Goals Per Minute</span>
+            <span class="stat-value">{{element.statData.statsOverall.goalsPerMinute | number}}</span>
+          </mat-list-item>
+        </mat-list>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="currentColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: currentColumns;"></tr>
+  </table>
+
+  <mat-paginator #paginator showFirstLastButtons
+                 [pageSize]="pageSize" [pageSizeOptions]="[10, 50]" [length]="totalResults"
+                 (page)="pageEvent=handlePageEvent($event)" >
+  </mat-paginator>
+
+</div>

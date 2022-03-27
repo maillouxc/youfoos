@@ -1,0 +1,78 @@
+<div *ngIf="gameInProgressObservable | async as currentGame; else noGame">
+  <mat-card class="game-wrapper">
+    <div class="game">
+      <div class="black-team">
+        <div class="black-player center-vertical">
+          <img (click)="goToUserProfile(currentGame.game.blackOffenseUserId)"
+               class="black-img"
+               src="{{ currentGame.blackOffensePlayer.avatar }}"/>
+          <div class="player-info">
+            <p (click)="goToUserProfile(currentGame.game.blackOffenseUserId)" class="name">
+              {{ currentGame.blackOffensePlayer.name }}
+            </p>
+            <p *ngIf="currentGame.game.isDoubles" class="role">Offense</p>
+          </div>
+        </div>
+
+        <div *ngIf="currentGame.game.isDoubles" class="black-player center-vertical">
+          <img (click)="goToUserProfile(currentGame.game.blackDefenseUserId)"
+               class="black-img"
+               src="{{ currentGame.blackDefensePlayer.avatar }}"/>
+          <div class="player-info">
+            <p (click)="goToUserProfile(currentGame.game.blackDefenseUserId)" class="name">
+              {{ currentGame.blackDefensePlayer.name }}
+            </p>
+            <p class="role">Defense</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="center-vertical ">
+        <div class="center-column">
+          <h2>Game In Progress</h2>
+          <strong>Game {{ currentGame.game.gameNumber }}</strong>
+          <a *ngIf="currentGame.game.tournamentId"
+             href="tournaments/{{currentGame.game.tournamentId}}">Tournament Game</a>
+          <div class="scoreboard">
+            <p class="black-score">{{ currentGame.game.blackTeamScore }}</p>
+            <p class="gold-score">{{ currentGame.game.goldTeamScore }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="gold-team">
+        <div class="gold-player center-vertical">
+          <div class="player-info">
+            <p (click)="goToUserProfile(currentGame.game.goldOffenseUserId)" class="name">
+              {{ currentGame.goldOffensePlayer.name }}
+            </p>
+            <p *ngIf="currentGame.game.isDoubles" class="role">Offense</p>
+          </div>
+          <img (click)="goToUserProfile(currentGame.game.goldOffenseUserId)"
+               class="gold-img"
+               src="{{ currentGame.goldOffensePlayer.avatar }}"/>
+        </div>
+
+        <div *ngIf="currentGame.game.isDoubles" class="gold-player center-vertical">
+          <div class="player-info">
+            <p (click)="goToUserProfile(currentGame.game.goldDefenseUserId)" class="name">
+              {{ currentGame.goldDefensePlayer.name }}
+            </p>
+            <p class="role">Defense</p>
+          </div>
+          <img (click)="goToUserProfile(currentGame.game.goldDefenseUserId)"
+               class="gold-img"
+               src="{{ currentGame.goldDefensePlayer.avatar }}"/>
+        </div>
+      </div>
+    </div>
+    <yf-game-events [gameData]="gameInProgressObservable"></yf-game-events>
+  </mat-card>
+</div>
+
+<ng-template #noGame>
+  <mat-card class="no-game">
+    <h2>No game in progress</h2>
+    <em>That means the table is free - go play a game!</em>
+  </mat-card>
+</ng-template>

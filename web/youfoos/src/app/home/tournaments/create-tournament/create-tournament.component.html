@@ -1,0 +1,68 @@
+<mat-card class="create-tournament-component">
+  <h2>Create Tournament</h2>
+
+  <mat-form-field appearance="outline" class="tournament-name">
+    <mat-label>Tournament Name</mat-label>
+    <input matInput [(ngModel)]="tournamentName" maxlength="50">
+  </mat-form-field>
+
+  <mat-form-field class="tournament-description" appearance="outline">
+    <mat-label>Tournament Description</mat-label>
+    <textarea matInput [(ngModel)]="tournamentDescription" maxlength="250"></textarea>
+    <span *ngIf="tournamentDescription.length > 200">{{tournamentDescription.length}} of 250</span>
+  </mat-form-field>
+
+  <div class="form-row">
+    <mat-radio-group class="game-type">
+      <mat-radio-button
+        (click)="onChangeGameType('1V1')"
+        value="Singles">Singles (1v1)</mat-radio-button>
+      <mat-radio-button
+        (click)="onChangeGameType('2V2')"
+        value="Doubles">Doubles (2v2)</mat-radio-button>
+    </mat-radio-group>
+
+    <mat-form-field appearance="outline" class="player-count">
+      <mat-label>Number of Players</mat-label>
+      <mat-select [(ngModel)]="selectedPlayerCount">
+        <mat-option
+          *ngFor="let option of currentPlayerCountOptions$ | async"
+          [value]="option">{{option}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <mat-form-field class="tournament-start-date-picker">
+    <mat-label>Start Date</mat-label>
+    <input matInput
+           #input="ngModel"
+           [(ngModel)]="startDate"
+           [matDatepicker]="tournamentStartDatePicker"
+           [min]="minStartDate"
+           [max]="maxStartDate">
+    <mat-datepicker-toggle matSuffix [for]="tournamentStartDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #tournamentStartDatePicker></mat-datepicker>
+    <mat-error *ngIf="input.hasError('matDatepickerMax')">Must be within the next 30 days.</mat-error>
+    <mat-error *ngIf="input.hasError('matDatepickerMin')">Flux Capacitor Error: Can't time travel.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="tournament-end-date-picker">
+    <mat-label>End Date</mat-label>
+    <input matInput
+           #input="ngModel"
+           [(ngModel)]="endDate"
+           [matDatepicker]="tournamentEndDatePicker"
+           [min]="minEndDate"
+           [max]="maxEndDate">
+    <mat-datepicker-toggle matSuffix [for]="tournamentEndDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #tournamentEndDatePicker></mat-datepicker>
+    <mat-error *ngIf="input.hasError('matDatepickerMax')">Must be within the next 30 days.</mat-error>
+    <mat-error *ngIf="input.hasError('matDatepickerMin')">Must be within the next 30 days.</mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button
+          class="submit-button"
+          color="accent"
+          (click)="onClickSubmit()">Create</button>
+
+</mat-card>

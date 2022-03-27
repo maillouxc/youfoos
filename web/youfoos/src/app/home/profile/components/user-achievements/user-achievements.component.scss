@@ -1,0 +1,61 @@
+.achievements-list {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-column-gap: 0.5rem;
+  grid-row-gap: 0.3rem;
+
+  .achievement {
+    justify-self: stretch;
+    display: flex;
+    height: 90px;
+    border: solid 2px;
+
+    img {
+      width: 90px;
+      display: inline-block;
+    }
+
+    .awardInfo {
+      text-align: start;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100%;
+      margin: 0 12px 0 12px;
+    }
+  }
+}
+
+.achievement-title {
+  margin-top: 6px;
+  margin-bottom: 0;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+.achievement-subtitle {
+  margin-top: 0;
+  margin-bottom: auto;
+}
+
+mat-progress-bar {
+  height: 10px;
+  margin-bottom: 8px;
+}
+
+.achievement-unlock-date {
+  margin-top: auto;
+  margin-bottom: 4px;
+  font-size: 0.8em;
+  text-align: right;
+  font-weight: 300;
+}
+
+.achievement-not-unlocked {
+  font-style: italic;
+  font-weight: 300;
+  font-size: 0.8em;
+  margin-bottom: 4px;
+  text-align: right;
+}

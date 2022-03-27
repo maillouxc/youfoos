@@ -1,0 +1,12 @@
+# This is a global .gitignore for the entire project
+
+# Built files
+*.exe
+*.jar
+*.dll
+
+# Visual studio code files
+*.vscode/
+
+# Webstorm idea files
+*.idea/

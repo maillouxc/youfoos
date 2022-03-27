@@ -1,0 +1,20 @@
+<yf-games-progress-bar [gameType]="'Overall'"></yf-games-progress-bar>
+
+<div class="hall-of-fame-container">
+  <mat-grid-list cols="3" gutterSize="16px" rowHeight="140px">
+    <mat-grid-tile *ngFor="let accoladeVm of accolades$ | async">
+      <mat-card [ngClass]="{'positive-connotation': accoladeVm.connotation==0,
+                            'negative-connotation': accoladeVm.connotation==2,
+                            'neutral-connotation': accoladeVm.connotation==1}">
+        <img class="userAvatar no-cursor" *ngIf="!accoladeVm.userId" src="{{ accoladeVm.image }}">
+        <img class="userAvatar" *ngIf="accoladeVm.userId" (click)="goToProfile(accoladeVm.userId)" src="{{ accoladeVm.image }}">
+        <div class="awardInfo">
+          <h2>{{ accoladeVm.accoladeName }}</h2>
+          <div class="awardeeName no-cursor" *ngIf="!accoladeVm.userId" >{{ accoladeVm.awardeeName }}</div>
+          <div class="awardeeName" *ngIf="accoladeVm.userId" (click)="goToProfile(accoladeVm.userId)" >{{ accoladeVm.awardeeName }}</div>
+          <div class="statValue">{{ accoladeVm.statValue }}</div>
+        </div>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

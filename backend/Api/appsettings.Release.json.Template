@@ -1,0 +1,43 @@
+﻿{
+  "MongoDB": {
+    "ConnectionString": "TODO",
+    "Database": "YouFoosFoosball"
+  },
+
+  "EmailSettings": {
+    "PrimaryDomain": "TODO",
+    "PrimaryPort": "587",
+    "UsernameEmail": "TODO",
+    "UsernamePassword": "TODO",
+    "FromEmail": "fromEmail",
+    "ToEmail": "toEmail",
+    "CcEmail": "ccEmail"
+  },
+
+  "Serilog": {
+    "MinimumLevel": "Information",
+    "WriteTo": [
+      {
+        "Name": "File",
+        "Args": {
+          "pathFormat": "logs/youfoos-api-log-{Date}.log",
+          "fileSizeLimitBytes": 104857600,
+          "retainedFileCountLimit": 31,
+          "outputTemplate": "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level}] [{SourceContext}] [{EventId}] {Message}{NewLine}{Exception}"
+        }
+      },
+      {
+        "Name": "Console",
+        "Args": {
+          "outputTemplate": "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level}] [{SourceContext}] [{EventId}] {Message}{NewLine}{Exception}"
+        }
+      }
+    ]
+  },
+
+  "JwtSigning": {
+    "SigningSecret": "TODO",
+    "TokenExpirationTimeMinutes": 60,
+    "Issuer": "TODO"
+  }
+}

@@ -1,0 +1,21 @@
+<mat-card class="recent-games">
+  <mat-card-title>Recent Games</mat-card-title>
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Team</th>
+        <th scope="col">Score</th>
+        <th scope="col">Results</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let recentGame of games$ | async">
+        <tr>
+          <td [ngStyle]="getStyleTeam(recentGame)">{{getTeam(recentGame)}}</td>
+          <td>{{recentGame.blackTeamScore}} &nbsp; v &nbsp; <span style="color: darkgoldenrod;">{{recentGame.goldTeamScore}}</span></td>
+          <td [ngStyle]="getStyleWin(recentGame)"><p>{{getWinning(recentGame)}}</p></td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</mat-card>

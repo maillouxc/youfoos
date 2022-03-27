@@ -1,0 +1,10 @@
+<div class="flex-grid" *ngIf="user$ | async as user">
+  <yf-profile-summary class="col" [userId]="user.id"></yf-profile-summary>
+
+  <div class="col">
+    <yf-profile-stats [userId]="user.id"></yf-profile-stats>
+    <yf-user-achievements [userId]="user.id"></yf-user-achievements>
+  </div>
+
+  <yf-profile-recent-games class="col" [user]="user"></yf-profile-recent-games>
+</div>

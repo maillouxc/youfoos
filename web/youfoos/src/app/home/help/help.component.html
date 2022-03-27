@@ -1,0 +1,80 @@
+<section class="help">
+    <div class="section-header">
+      <h2>Frequently Asked Questions</h2>
+      <p>Understand YouFoos better and find answers to common questions</p>
+    </div>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          How is Rank Calculated?
+        </mat-expansion-panel-header>
+        <p>
+          We use an adapted version of Microsoft's <a href="https://www.microsoft.com/en-us/research/project/trueskill-ranking-system/">TrueSkill</a>
+          algorithm!
+        </p>
+
+        <p>
+          The TrueSkill algorithm is a skill-based ranking system developed for Xbox Live by Microsoft Research.
+          It was originally developed for Halo matchmaking and rankings in 2005, but because the ranking changes
+          per match depend <b><em>only</em></b> on the outcome of the game (win or loss) -- and not the performace
+          or actions of any players - it can be adapted almost to any game.
+        </p>
+
+        <p>
+          It's a pretty sophisticated algorithm with some pretty complex mathematics involved, so go read the linked
+          whitepaper if you want more information about it. TrueSkill is smart enough to handle scenarios where one player is
+          performing much better than their teammates - lower skilled players can't just jump up the leaderboard
+          by always playing with their talented friends. It's a long way to the top! It also works well in team games
+          where it's difficult to determine how much each player is contributing to the success of the team.
+        </p>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          Why did my rank go down, even though I won!?
+        </mat-expansion-panel-header>
+        <p>It's probably not a bug, but rather a rare and interesting mathematical oddity of the TrueSkill system.</p>
+        <p>
+          If the system has a very high mathematical confidence in your skill level and you play someone much lower ranked than you,
+          it's possible for your skill to go <em>down</em> even though you won. This is because your skill is not a
+          single number - it's a combination of some pretty advanced mathematical factors. It's possible for some of
+          these factors to increase, while others will decrease. The singular value that is used to sort the leaderboard
+          could be calculated to be slightly lower in these rare cases - but rest assured that <u><em>the system does not
+          penalize you for winning games, under any circumstance</em></u>, unlike our previous modified ELO system.
+        </p>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          Your ranking system sucks!
+        </mat-expansion-panel-header>
+        <p>Come on, that's not even a question. But yeah, you're probably right.</p>
+        <p>
+        Designing a ranking system is really tough! That's because we're limited in what data we can collect. 
+        We need a way to measure performance of each player - easy enough for a 1v1 game, but in a 2v2 game 
+        the role of each player is different. We can't measure the defense player's performance by how many goals 
+        they scored, for instance. In times of trouble, we must turn to our old friend - <b><em>advanced mathematics!</em></b>
+        </p>
+        <p>Curious how it works? See "How is Rank Calculated?" above.</p>
+        <p>If you've got a better idea, I'd love to hear it - really. I'm open to suggestions.</p>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          How often are stats calculated?
+        </mat-expansion-panel-header>
+        <p>Stats are recalculated after each game, for the players that played in that game.</p>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          What do I do if I lose my RFID card?
+        </mat-expansion-panel-header>
+        <p>We support changing your RFID number on the profile page! However, there's a small catch.</p>
+        <p>
+        You <em>must</em> make this change before you play a game with your new card. We don't
+        currently support merging existing accounts. This may come in the future.
+        </p>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>

@@ -1,0 +1,32 @@
+<!-- This view shows that tournament that is currently in progress -->
+<div class="tournament" *ngIf="(currentTournament$ | async) as tournament; else noneInProgress">
+  <div>
+    <mat-card class="register-for-tournament">
+      <p>This tournament is currently open for registration.</p>
+
+      <button mat-raised-button color="primary"
+              (click)="onClickJoinTournament()"
+              *ngIf="!isPlayerInCurrentTournament">Join Tournament</button>
+
+      <p *ngIf="isPlayerInCurrentTournament">
+        You are currently registered for the tournament!
+      </p>
+    </mat-card>
+  </div>
+
+  <yf-tournament-bracket [tournament]="tournament"></yf-tournament-bracket>
+</div>
+
+<!-- This is the view that is shown if there is no tournament in progress currently -->
+<ng-template #noneInProgress>
+  <mat-card class="no-tournament">
+    <p>There is no tournament currently in progress.</p>
+
+    <!-- If the user has permission to create a tournament, show them a prompt -->
+    <p *ngIf="isAdmin">Maybe you should create one?</p>
+
+    <!-- If they don't have permission to create a tournament, instead show a message -->
+    <p *ngIf="!isAdmin">You don't have the permission to create a new tournament.</p>
+    <button mat-raised-button color="accent" routerLink="../create">Create Tournament</button>
+  </mat-card>
+</ng-template>

@@ -1,0 +1,48 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "material-theme";
+
+/* Rules for material icon font sizing */
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+/* Rules for using material icons as black on a light background */
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+
+/* Rules for using material icons as white on a dark background */
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+
+/* Remove the default 8px margin on the body */
+/* Fill body container to 100% of height */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.mat-typography {
+  h1 {
+    font-size: 35px;
+    font-weight: bold;
+  }
+}
+
+/* We can't customize this inside our individual components - so we have to do this lame shit */
+.mat-button-toggle-label-content {
+  line-height: 0 !important;
+  padding: 16px 10px 16px 10px !important;
+  width: 64px;
+}
+
+@font-face {
+  font-family: gagalin;
+  src: url(assets/fonts/gagalin.ttf);
+}
+
+.mat-dialog-content {
+  font-family: 'Roboto', sans-serif;
+}

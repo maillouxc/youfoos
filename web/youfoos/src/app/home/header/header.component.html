@@ -1,0 +1,82 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="false" [mode]="isMobile ? 'over' : 'side'">
+    <mat-toolbar class="side-text">Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item (click)="drawer.toggle()" routerLink="/games">Games</a>
+      <a mat-list-item (click)="drawer.toggle()" routerLink="/tournaments">Tournaments
+        <mat-icon class="tournaments-badge"
+                  matBadge="1"
+                  matBadgePosition="above after"
+                  matBadgeColor="warn"></mat-icon></a>
+      <a mat-list-item (click)="drawer.toggle()" routerLink="/leaderboard">Leaderboard</a>
+      <a mat-list-item (click)="drawer.toggle()" routerLink="/hall-of-fame">Hall of Fame</a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar>
+      <button mat-icon-button type="button" (click)="drawer.toggle()" *ngIf="isMobile">
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <a routerLink="/games">
+        <img class="toggle-layout youfoos-name-logo" src="../../../assets/images/youfoos-name-logo.png"/>
+      </a>
+
+      <nav mat-tab-nav-bar color="accent" class="toggle-layout" disablePagination=true>
+        <a mat-tab-link
+           routerLinkActive #rla1="routerLinkActive"
+           [active]="rla1.isActive"
+           routerLink="/games">Games
+        </a>
+        <a class="tournaments-link-with-badge"
+           mat-tab-link
+           routerLinkActive #rla2="routerLinkActive"
+           [active]="rla2.isActive"
+           routerLink="/tournaments/current">Tournaments
+          <mat-icon class="tournaments-badge"
+                    matBadge="1"
+                    matBadgePosition="above after"
+                    matBadgeColor="warn"></mat-icon>
+        </a>
+        <a mat-tab-link
+           routerLinkActive #rla3="routerLinkActive"
+           [active]="rla3.isActive"
+           routerLink="/leaderboard">Leaderboard
+        </a>
+        <a mat-tab-link
+           routerLinkActive #rla4="routerLinkActive"
+           [active]="rla4.isActive"
+           routerLink="/hall-of-fame">Hall of Fame
+        </a>
+      </nav>
+
+      <div class="profile" routerLink="/profile">
+        <span class="profile-name">{{ userName }}</span>
+        <img class="avatar" src="{{userAvatar$ | async}}"/>
+        <mat-icon
+          class="profile-badge"
+          matBadge="1"
+          matBadgePosition="above after"
+          matBadgeOverlap="true"
+          matBadgeColor="warn"></mat-icon>
+      </div>
+      &nbsp;
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item routerLink="/help">
+            <span>Help</span>
+          </button>
+          <button mat-menu-item routerLink="/about">
+            <span>About</span>
+          </button>
+          <button mat-menu-item (click)="onLogout()">
+            <span>Logout</span>
+          </button>
+        </mat-menu>
+      </button>
+    </mat-toolbar>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,74 @@
+<mat-card>
+  <h2>What is YouFoos?</h2>
+
+  <p><em>YouFoos is the world's most advanced stats-tracking solution for Foosball!</em></p>
+
+  <p>
+    YouFoos is a powerful analyics platform that collects data directly from your
+    foosball table and sends it to a server for analytics and stat tracking.
+  </p>
+
+  <p> 
+    Protyped as a senior software engineering project for an unnamed software company, 
+    the system was designed so that players sign in to their foosball table using office RFID 
+    keycards. Play actions are recorded via sensors installed on the modified table and their 
+    analytics are sent to a backend of servers to be crunched. This powerful web application 
+    allows you to see game statistics in a detailed and insightful way.
+  </p>
+  
+  <p>
+    After the senior project, one of the original students took over maintaining it and continued
+    adding additional features. The project is currently being refined and overhauled in preparation for
+    v2.0 release which will culminate with a solution that can be built be anyone easily
+    and used in any office, bar, or even home.
+  </p>
+
+</mat-card>
+
+<mat-card>
+  <h2>Contributors</h2>
+
+  <p>YouFoos v1.0 was originally the senior project of a team of FGCU Software Engineering students of the Class of 2019:</p>
+
+  <mat-grid-list cols=4 rowHeight="40px" gutterSize="16px">
+    <mat-grid-tile *ngFor="let contributorName of contributorNames">
+      <div>
+        <h3 class="contributor-name">{{contributorName}}</h3>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <p>Subsequent maintenance and upgrades since v1.0 provided by Chris Mailloux.</p>
+</mat-card>
+
+<mat-card>
+  <h2>Special Thanks</h2>
+
+  <p>YouFoos would not have been possible without the support, guidance, feedback, and patience of the following individuals:</p>
+
+  <mat-grid-list cols=3 rowHeight="40px" gutterSize="16px">
+    <mat-grid-tile *ngFor="let specialPerson of specialPeople">
+      <div>
+        <h3 class="contributor-name">{{specialPerson}}</h3>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</mat-card>
+
+<mat-card>
+  <h2>Art Attributions</h2>
+
+  <p><em>I'm not much of an artist, and there's no way YouFoos would look so good without help from those with talent:</em></p>
+
+  <p>Several icons generously provided by <a href="://www.flaticon.com/authors/freepik">Freepik</a> at <a href="http://www.flaticon.com">www.flaticon.com</a></p>
+  <p>Bug icon by <a href="https://www.flaticon.com/authors/dave-gandy" title="Dave Gandy">Dave Gandy</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a></p>
+  <p>Some icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+  <p>Queue icon by Adrien Coquet from the Noun Project</p>
+  <p>Caffeine addiction by Marie Van den Broeck from the Noun Project</p>
+  <p>Soccer ball icon by Natapon Chntabutr from the Noun project</p>
+  <p>Table Football Player by Milky - Digitigal Innovation from the Noun Project</p>
+
+  <p><em>Most icons received additional modification and tweaks by Chris Mailloux</em></p>
+</mat-card>
+
+<p id="version-tag">Version 1.7</p>

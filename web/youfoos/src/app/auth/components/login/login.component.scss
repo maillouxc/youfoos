@@ -1,0 +1,27 @@
+mat-card-subtitle {
+  margin: 8px;
+  font-size: 1.2em;
+}
+
+mat-form-field {
+  display: block;
+  width: 400px;
+  margin-bottom: 8px;
+}
+
+button {
+  display: inline-block;
+  margin: 8px 8px;
+  text-align: center;
+  width: 160px;
+}
+
+a {
+  display: inline-block;
+  margin: 16px;
+}
+
+.errorMsg {
+  color: red;
+  margin: 8px;
+}

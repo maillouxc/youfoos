@@ -1,0 +1,53 @@
+version: '3.4'
+
+services:
+
+  api:
+    image: ${DOCKER_REGISTRY}api
+    build:
+      context: .
+      dockerfile: Api/Dockerfile
+    ports:
+      - "443:443"
+      - "80:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTPS_PORT=443
+      - ASPNETCORE_URLS=http://0.0.0.0:80"
+
+  statisticsservice:
+    image: ${DOCKER_REGISTRY}statisticsservice
+    depends_on:
+      - rabbitmq
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: StatisticsService/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
+  gameeventsservice:
+    image: ${DOCKER_REGISTRY}gameeventsservice
+    depends_on:
+      - rabbitmq
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: GameEventsService/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
+  rabbitmq:
+    image: "rabbitmq:3.7-management"
+    command: rabbitmq-server
+    hostname: "rabbitmq"
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    volumes:
+      - ./rabbitmq-config.conf:/etc/rabbitmq/rabbitmq.config
+    healthcheck:
+      test: [ "CMD", "nc", "-z", "localhost", "5672" ]
+      interval: 5s
+      timeout: 15s
+      retries: 1

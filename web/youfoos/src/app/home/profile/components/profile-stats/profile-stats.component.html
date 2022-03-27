@@ -1,0 +1,131 @@
+<mat-card *ngIf="userCalculatedStats$ | async as stats">
+  <mat-card-title>Player Stats</mat-card-title>
+  <div class="winrates">
+    <div class="stat-holder">
+      <span class="stat-name">Overall Winrate</span>
+      <span class="stat-value" [ngStyle]="getWinrateColor(stats.statsOverall.winrate)">{{stats.statsOverall.winrate | percent}}</span>
+      <span class="sub-stat-value" [matTooltip]="stats.winrateTooltipOverall">{{stats.gamesPlayedOverall}} games</span>
+    </div>
+    <div class="stat-holder">
+      <span class="stat-name">1V1 Winrate</span>
+      <span class="stat-value" [ngStyle]="getWinrateColor(stats.stats1V1.winrate)">{{stats.stats1V1.winrate | percent}}</span>
+      <span class="sub-stat-value" [matTooltip]="stats.winrateTooltip1V1">{{stats.gamesPlayed1V1}} games</span>
+    </div>
+    <div class="stat-holder">
+      <span class="stat-name">2V2 Winrate</span>
+      <span class="stat-value" [ngStyle]="getWinrateColor(stats.stats2V2.winrate)">{{stats.stats2V2.winrate | percent}}</span>
+      <span class="sub-stat-value" [matTooltip]="stats.winrateTooltip2V2">{{stats.gamesPlayed2V2}} games</span>
+    </div>
+    <div class="stat-holder">
+      <span class="stat-name">Offense Winrate</span>
+      <span class="stat-value" [ngStyle]="getWinrateColor(stats.stats2V2.offenseWinrate)">{{stats.stats2V2.offenseWinrate | percent}}</span>
+      <span class="sub-stat-value" [matTooltip]="stats.winrateTooltipOffense">{{stats.stats2V2.gamesAsOffense}} games</span>
+    </div>
+    <div class="stat-holder">
+      <span class="stat-name">Defense Winrate</span>
+      <span class="stat-value" [ngStyle]="getWinrateColor(stats.stats2V2.defenseWinrate)">{{stats.stats2V2.defenseWinrate | percent}}</span>
+      <span class="sub-stat-value" [matTooltip]="stats.winrateTooltipDefense">{{stats.stats2V2.gamesAsDefense}} games</span>
+    </div>
+  </div>
+
+  <div class="scoring">
+    <h2>Scoring</h2>
+    <div class="stat-holder">
+      <span class="stat-name">Total Goals</span>
+      <span class="stat-value">{{stats.statsOverall.goalsScored}}</span>
+      <span class="sub-stat-value">{{stats.statsOverall.goalsPerMinute | number}} / minute</span>
+    </div>
+    <div class="stat-holder">
+      <span class="stat-name">Owngoals</span>
+      <span class="stat-value">{{stats.statsOverall.ownGoals}}</span>
+      <span class="sub-stat-value">{{(stats.statsOverall.ownGoals / (stats.statsOverall.gamesWon + stats.statsOverall.gamesLost)) | number}} / game</span>
+    </div>
+    <div class="stat-holder">
+      <span class="stat-name">Net Score</span>
+      <span class="stat-value">{{stats.statsOverall.goalsScored - stats.statsOverall.goalsAllowed}}</span>
+      <span class="sub-stat-value">{{stats.statsOverall.goalsAllowed}} goals allowed</span>
+    </div>
+    <div class="stat-holder">
+      <span class="stat-name">1V1 Goals</span>
+      <span class="stat-value">{{stats.stats1V1.goalsScored}}</span>
+      <span class="sub-stat-value">{{stats.goalsPerGame1V1 | number}} / game</span>
+    </div>
+    <div class="stat-holder">
+      <span class="stat-name">Offense Goals</span>
+      <span class="stat-value">{{stats.stats2V2.goalsScoredAsOffense}}</span>
+      <span class="sub-stat-value">{{stats.offenseGoalsPerGame | number}} / game</span>
+    </div>
+    <div class="stat-holder">
+      <span class="stat-name">Defense Goals</span>
+      <span class="stat-value">{{stats.stats2V2.goalsScoredAsDefense}}</span>
+      <span class="sub-stat-value">{{stats.defenseGoalsPerGame | number}} / game</span>
+    </div>
+  </div>
+
+  <div class="play-times">
+    <h2>Play Times</h2>
+    <div class="stat-holder">
+      <span class="stat-name">Total Time</span>
+      <span class="stat-value">{{stats.statsOverall.totalTimePlayedSecs | secondsToHms}}</span>
+    </div>
+    <div class="stat-holder">
+      <span class="stat-name">Average Game</span>
+      <span class="stat-value">{{stats.statsOverall.averageGameLengthSecs | secondsToHms}}</span>
+    </div>
+    <div class="stat-holder">
+      <span class="stat-name">Longest Game</span>
+      <span class="stat-value">{{stats.statsOverall.longestGameLengthSecs | secondsToHms}}</span>
+    </div>
+    <div class="stat-holder">
+      <span class="stat-name">Shortest Game</span>
+      <span class="stat-value">{{stats.statsOverall.shortestGameLengthSecs | secondsToHms}}</span>
+    </div>
+  </div>
+
+  <div class="misc">
+    <h2>Misc</h2>
+    <div class="stat-holder">
+      <span class="stat-name">Longest Win Streak</span>
+      <span class="stat-value">{{stats.statsOverall.longestWinStreak}}</span>
+    </div>
+    <div class="stat-holder">
+      <span class="stat-name">Longest Loss Streak</span>
+      <span class="stat-value">{{stats.statsOverall.longestLossStreak}}</span>
+    </div>
+    <div class="stat-holder">
+      <span class="stat-name">Shutout Wins</span>
+      <span class="stat-value">{{stats.statsOverall.shutoutWins}}</span>
+    </div>
+  </div>
+
+  <div class="team-play-container">
+    <div class="team-play" *ngIf="stats.stats2V2.bestPartnerId">
+      <h2>Team Play</h2>
+      <em>5 games played with the partner required to qualify</em>
+
+      <div class="stat-holder" *ngIf="bestPartner$ | async as bestPartner">
+        <span class="stat-name">Best Partner</span>
+        <img class="avatar" (click)="goToUserProfile(stats.stats2V2.bestPartnerId)" src="{{bestPartner.avatar}}">
+        <span class="player-name" (click)="goToUserProfile(stats.stats2V2.bestPartnerId)">{{bestPartner.name}}</span>
+        <span class="stat-value">{{stats.stats2V2.bestPartnerWinrate | percent}} Winrate</span>
+      </div>
+      <div class="stat-holder" *ngIf="worstPartner$ | async as worstPartner">
+        <span class="stat-name">Worst Partner</span>
+        <img class="avatar" (click)="goToUserProfile(stats.stats2V2.worstPartnerId)" src="{{worstPartner.avatar}}">
+        <span class="player-name" (click)="goToUserProfile(stats.stats2V2.worstPartnerId)">{{worstPartner.name}}</span>
+        <span class="stat-value">{{stats.stats2V2.worstPartnerWinrate | percent}} Winrate</span>
+      </div>
+      <div class="stat-holder" *ngIf="mostFrequentPartner$ | async as mostFrequentPartner">
+        <span class="stat-name">Most Frequent Partner</span>
+        <img class="avatar" (click)="goToUserProfile(stats.stats2V2.mostFrequentPartnerId)" src="{{mostFrequentPartner.avatar}}">
+        <span class="player-name" (click)="goToUserProfile(stats.stats2V2.mostFrequentPartnerId)">{{mostFrequentPartner.name}}</span>
+        <span class="stat-value">{{stats.stats2V2.mostFrequentPartnerNumGamesPlayed}} games together</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="team-play-emptyview" *ngIf="!stats.stats2V2.bestPartnerId">
+    <h2>Team Play</h2>
+    <em>At least 5 games with a single person needed for partner stats to be available</em>
+  </div>
+</mat-card>

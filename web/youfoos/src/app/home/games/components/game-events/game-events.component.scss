@@ -1,0 +1,43 @@
+.play-by-play {
+  width: 100%;
+  display: block;
+  text-align: center;
+  margin: 32px auto 8px auto;
+
+  h3 {
+    font-weight: 500;
+    color: steelblue;
+  }
+
+  mat-list {
+    border-top: 3px solid blue;
+    width: 55%;
+    margin: 0 auto;
+  }
+
+  mat-list-item {
+    height: 24px;
+  }
+
+  .game-time {
+    text-align: left;
+    width: 20%;
+    margin-left: 32px;
+  }
+
+  .game-event {
+    text-align: right;
+    width: 80%;
+    margin-right: 32px;
+  }
+
+  .gold {
+    color: goldenrod;
+    font-weight: 500;
+  }
+
+  .black {
+    color: black;
+    font-weight: 500;
+  }
+}

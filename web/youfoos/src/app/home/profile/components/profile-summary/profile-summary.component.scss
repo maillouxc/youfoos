@@ -1,0 +1,28 @@
+mat-card {
+  padding: 32px;
+}
+
+.avatar {
+  width: 200px;
+  height: 200px;
+}
+
+.username {
+  margin-top: 24px;
+}
+
+.join-date {
+  margin-bottom: 24px;
+}
+
+button {
+  width: 180px;
+  margin: 12px auto;
+  display: block;
+}
+
+.admin-status {
+  color: forestgreen;
+  font-weight: 500;
+  font-size: 1.1em;
+}

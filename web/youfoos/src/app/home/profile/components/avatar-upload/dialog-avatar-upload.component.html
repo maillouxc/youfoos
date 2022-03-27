@@ -1,0 +1,18 @@
+<div class="upload-container">
+  <h1 mat-dialog-title align="center" class="upload-title">Upload Avatar</h1>
+  <div id="upload-container" mat-dialog-content align="center" class="upload-image-container">
+    <img id="upload-image" *ngIf="!showAltImage" [src]="imageShow" class="avatar-image" height="300px" width="300px" alt="Upload image"> <br/>
+    <div *ngIf="showAltImage" style="height: 300px; width: 300px;"></div>
+    <input id="image-input" #file type="file"  [hidden]="true" accept=".jpeg, .jpg, .gif, .png" class="choose-file-button" (change)="onFileChanged($event)" required>
+    <button id="choose-image" mat-raised-button color="primary" (click)="file.click()">Choose Image</button>
+    <div>
+      <p>Upload a file less than 1MB in size.<br> Acceptable formats: .png, .jpeg, .jpg, .gif</p>
+    </div>
+
+  </div>
+  <div *ngIf="showError" align="center"><strong style="color:red;">{{errorMessage}}</strong></div>
+  <div mat-dialog-actions align="center" class="buttons">
+    <button id="image-cancel" mat-button matDialogClose mat-stroked-button color="warn" class="cancel-button" >Cancel</button>
+    <button id="image-submit" mat-button mat-stroked-button color="primary" (click)="uploadPhoto()" class="upload-button">Upload Image</button>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<h2>Recent Tournaments</h2>
+
+<div class="recent-games-list" *ngIf="recentTournaments$ | async as recentTournaments">
+  <mat-card class="recent-tournament"
+            *ngFor="let tournament of recentTournaments.results"
+            (click)="onClickRecentTournament(tournament.id)">
+    <h3 class="tournament-name">{{tournament.name}}</h3>
+
+    <p class="tournament-start-date">{{tournament.startDate | date}}</p>
+    <p class="tournament-date-separator">-</p>
+    <p class="tournament-end-date">{{tournament.endDate | date}}</p>
+  </mat-card>
+</div>
