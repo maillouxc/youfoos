@@ -16,9 +16,9 @@ statistics in a detailed and insightful way.
 
 After the senior project, one of the original students took over maintaining it and continued
 adding additional features. The project is currently being refined and overhauled in preparation for
-v2.0 release which will culminate with a reusable solution that can be built be anyone easily
-and used in any office, bar, or even home. The exact release date that this v2.0 release will be ready
-is stil unknown as my development time is not always plentiful. However, when that v2.0 release happens,
+the v2.0 release which will culminate with a reusable solution that can be built by anyone easily
+and used in any office, bar, or even home. The exact release date that this v2.0 release will be ready by
+is still unknown as my development time is not always plentiful. However, when that v2.0 release happens,
 the project will be able to be used by ANYONE, and I intend on making kits available for order online.
 I am also considering the financial possibility of hosting cloud-based servers, negating the need for
 individuals to host YouFoos themselves.
@@ -48,7 +48,7 @@ which is unneccesary, or you can transfer it via USB stick or similar.
 
 2. Prepare the release mode configuration files.
 
-3. Ensure all necessary services (MongoDB, RabbitMQ, etc.) are available
+3. Ensure all necessary services (MongoDB, RabbitMQ, etc.) are available.
 
 4. Using Powershell as administrator - start each microservice in release mode.
 
@@ -62,7 +62,7 @@ which is unneccesary, or you can transfer it via USB stick or similar.
 
 The 3 backend services each have several configuration files.
 
-- `launchSettings.json` overrides all of the below and is used by visual studio during development builds 
+- `launchSettings.json` overrides all of the below and is used by visual studio during development builds.
 - `appsettings.json` is always loaded and is used for common config options.
 - `appsettings.Development.json` is used only in development builds.
 - `appsettings.Release.json` does not get checked in to the repository - it contains production config info/secrets
