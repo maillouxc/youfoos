@@ -47,7 +47,6 @@ namespace YouFoos.Api.Config
                 });
 
                 config.OperationFilter<SwaggerNoAuthEndpointsOperationFilter>();
-                config.DescribeAllEnumsAsStrings();
 
                 // Find all the XML comments used to generate info in Swagger UI.
                 var xmlFiles = Directory.GetFiles(AppContext.BaseDirectory, "*.xml");
