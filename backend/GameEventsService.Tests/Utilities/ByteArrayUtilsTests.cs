@@ -18,6 +18,7 @@ namespace YouFoos.GameEventsService.Tests.Unit.Utilities
         public void ShouldShiftByteArraysLeftByOne(byte[] givenBytes, byte[] expectedBytes)
         {
             ByteArrayUtils.ShiftLeft(givenBytes);
+
             // Compare actual and expected byte by byte
             for (int i = 0; i < givenBytes.Length; i++)
             {

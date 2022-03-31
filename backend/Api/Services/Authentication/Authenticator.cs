@@ -28,16 +28,12 @@ namespace YouFoos.Api.Services.Authentication
         {
             if (credentials == null) return false;
 
-            var email = credentials.EmailAddress;
-            var providedPassword = credentials.Password;
-
-            var expectedCredentials = await _credentialsRepository.GetAccountCredentialsForUserWithEmail(email);
+            var expectedCredentials = await _credentialsRepository.GetAccountCredentialsForUserWithEmail(credentials.EmailAddress);
             if (expectedCredentials == null) return false;
 
             var passwordHasher = new PasswordHasher<AccountCredentials>();
-            var hashVerificationResult = passwordHasher.VerifyHashedPassword(expectedCredentials,
-                                                                             expectedCredentials.HashedPassword,
-                                                                             providedPassword);
+            var hashVerificationResult = passwordHasher.VerifyHashedPassword(
+                expectedCredentials, expectedCredentials.HashedPassword, credentials.Password);
 
             return hashVerificationResult == PasswordVerificationResult.Success;
         }

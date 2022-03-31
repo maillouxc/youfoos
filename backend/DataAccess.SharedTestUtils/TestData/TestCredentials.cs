@@ -10,13 +10,12 @@ namespace YouFoos.DataAccess.SharedTestUtils.TestData
     [ExcludeFromCodeCoverage]
     public static class TestCredentials
     {
-        private static readonly PasswordHasher<AccountCredentials> PasswordHasher = 
-            new PasswordHasher<AccountCredentials>();
+        private static readonly PasswordHasher<AccountCredentials> PasswordHasher = new();
 
-        public static async Task InsertIntoDatabase(IMongoContext mongoContext, 
-                                                    List<AccountCredentials> credentials)
+        public static async Task InsertIntoDatabase(IMongoContext mongoContext, List<AccountCredentials> credentials)
         {
             var credentialsRepository = new AccountCredentialsRepository(mongoContext);
+
             foreach (var credential in credentials)
             {
                 await credentialsRepository.InsertNewUserCredentials(credential);
@@ -32,7 +31,7 @@ namespace YouFoos.DataAccess.SharedTestUtils.TestData
         }
 
         public static readonly string TestCreds1Password = "Keylime123!";
-        public static readonly AccountCredentials TestCreds1 = new AccountCredentials
+        public static readonly AccountCredentials TestCreds1 = new()
         {
             Email = TestUsers.TestUser_1.Email,
             HashedPassword = PasswordHasher.HashPassword(null, TestCreds1Password)

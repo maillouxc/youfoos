@@ -5,16 +5,18 @@ using System.Linq;
 namespace YouFoos.Api.Validators
 {
     /// <summary>
-    /// A validation attribute that can be used to determine whether a password meets YouFoos requirements.
+    /// A <see cref="ValidationAttribute"/> attribute that can be used to determine whether a password meets YouFoos requirements.
     /// </summary>
     public class ValidPassword : ValidationAttribute
     {
+        private const int MIN_PASSWORD_LENGTH = 8;
+
         /// <summary>
-        /// Determines whether the given password is valid according to YouFoos requirements.
+        /// Determines whether the given password is valid according to YouFoos password security requirements.
         /// </summary>
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            var password = (string) value;
+            var password = value as string;
 
             if (string.IsNullOrEmpty(password))
             {
@@ -24,7 +26,7 @@ namespace YouFoos.Api.Validators
             if (password.Any(char.IsUpper) &&
                 password.Any(char.IsLower) &&
                 password.Any(char.IsDigit) &&
-                password.Length >= 8)
+                password.Length >= MIN_PASSWORD_LENGTH)
             {
                 return ValidationResult.Success;
             }
@@ -33,15 +35,16 @@ namespace YouFoos.Api.Validators
                 var errors = new List<string>();
           
                 if (!password.Any(char.IsUpper))
-                    errors.Add("Password must contain a upper case letter");
+                    errors.Add("Password must contain a upper case letter.");
                 if (!password.Any(char.IsLower))
-                    errors.Add("Password must contain a lower case letter");
+                    errors.Add("Password must contain a lower case letter.");
                 if (!password.Any(char.IsDigit))
-                    errors.Add("Password must contain a number");
-                if (password.Length < 8)
-                    errors.Add("Password must contain at least 8 characters");
+                    errors.Add("Password must contain a number.");
+                if (password.Length < MIN_PASSWORD_LENGTH)
+                    errors.Add("Password must contain at least 8 characters.");
 
                 var errorString = string.Join(", ", errors.ToArray());
+
                 return new ValidationResult(errorString);
             }
         }

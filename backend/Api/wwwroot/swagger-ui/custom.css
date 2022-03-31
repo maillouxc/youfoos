@@ -101,6 +101,7 @@
    so we have to change the text using CSS voodoo if we want any text to be different.
    I'll put all of these types of hacks in this one section to avoid any confusion.
 */
+
 .swagger-ui .dialog-ux .modal-ux-header h3 {
     visibility: hidden !important;
 }

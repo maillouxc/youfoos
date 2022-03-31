@@ -17,7 +17,6 @@ namespace YouFoos.Api.Services.Authentication
         private const int PasswordResetCodeLength = 10;
 
         private readonly IEmailSender _emailSender;
-
         private readonly IPasswordResetCodeRepository _passwordResetCodeRepository;
         private readonly IAccountCredentialsRepository _accountCredentialsRepository;
 
@@ -91,6 +90,7 @@ namespace YouFoos.Api.Services.Authentication
         public async Task<bool> ResetPasswordForUser(string email, string newPassword, string resetCode)
         {
             var isResetCodeValidForUser = await IsResetCodeValidForUser(resetCode, email);
+
             if (isResetCodeValidForUser)
             {
                 await ChangePasswordForUser(email, newPassword);
@@ -101,14 +101,6 @@ namespace YouFoos.Api.Services.Authentication
             return false;
         }
 
-        private async Task<bool> IsResetCodeValidForUser(string code, string email)
-        {
-            var resetCode = await _passwordResetCodeRepository.GetResetCodeForUserWithEmail(email);
-            if (resetCode == null || string.IsNullOrEmpty(code)) return false;
-            var expirationDate = resetCode.Created.AddMinutes(PasswordResetCodeExpirationMinutes);
-            return (resetCode.Code == code && expirationDate > DateTime.Now);
-        }
-        
         /// <summary>
         /// Concrete implementation of <see cref="IPasswordChangeService.ChangePasswordForUser(string, string)"/>.
         /// </summary>
@@ -118,6 +110,14 @@ namespace YouFoos.Api.Services.Authentication
             var credentials = await _accountCredentialsRepository.GetAccountCredentialsForUserWithEmail(email);
             credentials.HashedPassword = passwordHasher.HashPassword(null, newPassword);
             await _accountCredentialsRepository.ReplaceCredentials(credentials);
+        }
+
+        private async Task<bool> IsResetCodeValidForUser(string code, string email)
+        {
+            var resetCode = await _passwordResetCodeRepository.GetResetCodeForUserWithEmail(email);
+            if (resetCode == null || string.IsNullOrEmpty(code)) return false;
+            var expirationDate = resetCode.Created.AddMinutes(PasswordResetCodeExpirationMinutes);
+            return (resetCode.Code == code && expirationDate > DateTime.Now);
         }
     }
 }

@@ -1,11 +1,8 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace YouFoos.Api.Config
+﻿namespace YouFoos.Api.Config
 {
     /// <summary>
     /// Contains strongly typed configuration values used to configure JWT authentication.
     /// </summary>
-    [ExcludeFromCodeCoverage]
     public class JwtSettings
     {
         /// <summary>

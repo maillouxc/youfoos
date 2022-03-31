@@ -7,6 +7,9 @@ namespace YouFoos.StatisticsService.Utils
     /// </summary>
     public static class GaussianFunctions
     {
+        /// <summary>
+        /// The gaussian probability density function (PDF).
+        /// </summary>
         public static double At(double x, double mean = 0, double standardDeviation = 1)
         {
             double multiplier = 1.0 / (standardDeviation * Math.Sqrt(2 * Math.PI));
@@ -14,12 +17,18 @@ namespace YouFoos.StatisticsService.Utils
             return multiplier * expPart;
         }
 
+        /// <summary>
+        /// The gaussian cumulative distribution function (CDF).
+        /// </summary>
         public static double CumulativeTo(double x)
         {
             const double invsqrt2 = -0.707106781186547524400844362104;
             return 0.5 * ErrorFunctionCumulativeTo(invsqrt2 * x);
         }
 
+        /// <summary>
+        /// The gaussian inverse distribution function (aka. quantile function).
+        /// </summary>
         public static double InverseCumulativeTo(double x, double mean, double standardDeviation)
         {
             return mean - Math.Sqrt(2) * standardDeviation * InverseErrorFunctionCumulativeTo(2 * x);

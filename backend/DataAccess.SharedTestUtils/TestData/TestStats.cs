@@ -13,6 +13,7 @@ namespace YouFoos.DataAccess.SharedTestUtils.TestData
         public static async Task InsertIntoDatabase(IMongoContext mongoContext, List<UserStats> stats)
         {
             var statsRepo = new StatsRepository(mongoContext);
+
             foreach (var s in stats)
             {
                 await statsRepo.InsertOne(s);
@@ -27,7 +28,7 @@ namespace YouFoos.DataAccess.SharedTestUtils.TestData
             };
         }
 
-        public static UserStats TestStats1 = new UserStats()
+        public static UserStats TestStats1 = new()
         {
             Stats2V2 = new Stats2V2()
             {

@@ -14,6 +14,7 @@ namespace YouFoos.DataAccess.SharedTestUtils.TestData
         public static async Task InsertIntoDatabase(IMongoContext mongoContext, List<Game> games)
         {
             var gamesRepository = new GamesRepository(mongoContext);
+
             foreach (var game in games)
             {
                 await gamesRepository.InsertGame(game);

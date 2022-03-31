@@ -17,11 +17,10 @@ namespace YouFoos.Api.Utilities
         {
             var fileProvider = new ManifestEmbeddedFileProvider(Assembly.GetExecutingAssembly());
             const string fileName = "Resources/default-avatar.png";
-            using (var fileStream = fileProvider.GetFileInfo(fileName).CreateReadStream())
-            {
-                byte[] bytes = new BinaryReader(fileStream).ReadBytes((int)fileStream.Length);
-                return Convert.ToBase64String(bytes);
-            }
+            using var fileStream = fileProvider.GetFileInfo(fileName).CreateReadStream();
+            byte[] bytes = new BinaryReader(fileStream).ReadBytes((int)fileStream.Length);
+
+            return Convert.ToBase64String(bytes);
         }
     }
 }

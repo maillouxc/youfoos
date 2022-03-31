@@ -3,9 +3,12 @@ using System.Collections.Generic;
 
 namespace YouFoos.SharedLibrary.Extensions
 {
+    /// <summary>
+    /// Contains useful extension methods for the <see cref="List{T}"/> class.
+    /// </summary>
     public static class ListExtensions
     {
-        private static readonly Random rng = new Random();
+        private static readonly Random rng = new();
 
         /// <summary>
         /// Shuffles the provided list in place using the Fisher-Yates shuffle.
@@ -19,9 +22,7 @@ namespace YouFoos.SharedLibrary.Extensions
             {
                 n--;
                 int k = rng.Next(n + 1);
-                T value = list[k];
-                list[k] = list[n];
-                list[n] = value;
+                (list[n], list[k]) = (list[k], list[n]);
             }
         }
     }

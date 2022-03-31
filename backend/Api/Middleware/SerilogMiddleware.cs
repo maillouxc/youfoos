@@ -12,12 +12,13 @@ namespace YouFoos.Api.Middleware
     /// <summary>
     /// This middleware is used to log better information about network requests made using serilog.
     /// </summary>
+    /// <remarks>
     /// Inspired by the article found at blog.getseq.net/smart-logging-middleware-for-asp-net-core/
+    /// </remarks>
     [ExcludeFromCodeCoverage]
     public class SerilogMiddleware
     {
-        private const string MessageTemplate 
-            = "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms";
+        private const string MessageTemplate = "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms";
 
         private static readonly ILogger Log = Serilog.Log.Logger;
 
