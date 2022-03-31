@@ -12,14 +12,13 @@ namespace YouFoos.DataAccess.SharedTestUtils
     {
         private static IMongoDatabase _database;
 
-        public static MongoDbRunner Runner;
+        public static MongoDbRunner Runner { get; set; }
 
         /// <summary>
         /// Creates a connection to the in-memory Mongo2Go MongoDB server.
         /// The provided connection information in the mongoSettings param is ignored.
         /// </summary>
-        // ReSharper disable once UnusedParameter.Local
-        public InMemoryMongoContext(IOptions<MongoSettings> mongoSettings)
+        public InMemoryMongoContext(IOptions<MongoSettings> _)
         {
             // Every time MongoDbRunner.Create() is called, a new in-memory MongoDB is created with empty data
             if (Runner == null || (Runner.State != State.Running && Runner.State != State.AlreadyRunning))

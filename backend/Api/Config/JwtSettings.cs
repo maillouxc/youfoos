@@ -1,12 +1,12 @@
 ﻿namespace YouFoos.Api.Config
 {
     /// <summary>
-    /// Contains strongly typed configuration values used to configure JWT authentication.
+    /// The settings that YouFoos uses to configure JWT authentication.
     /// </summary>
     public class JwtSettings
     {
         /// <summary>
-        /// A secret key with all tokens are signed with.
+        /// A secret key that all tokens are signed with.
         /// </summary>
         public string SigningSecret { get; set; }
 
@@ -16,7 +16,7 @@
         public int TokenExpirationTimeMinutes { get; set; }
 
         /// <summary>
-        /// The token issuer.
+        /// The token issuer - in the form of a URL.
         /// </summary>
         public string Issuer { get; set; }
     }

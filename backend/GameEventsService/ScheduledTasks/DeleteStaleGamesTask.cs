@@ -53,7 +53,7 @@ namespace YouFoos.GameEventsService.ScheduledTasks
 
             if ((gameInProgress.GetDurationInSeconds() / 60) > StaleTimeMinutes)
             {
-                Log.Logger.Debug("Deleting stale game {@Game}", gameInProgress);
+                Log.Logger.Information("Deleting stale game {@Game}", gameInProgress);
                 await _gamesRepository.DeleteGameByIdAsync(gameInProgress.Guid);
             }
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using Xunit;
-using YouFoos.DataAccess.SharedTestUtils.TestData;
+using YouFoos.TestData;
 using YouFoos.StatisticsService.StatCalculations;
 
 namespace YouFoos.StatisticsService.Tests.Unit.Calculations

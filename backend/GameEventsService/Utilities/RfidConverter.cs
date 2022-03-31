@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using YouFoos.SharedLibrary.Utilities;
 
 namespace YouFoos.GameEventsService.Utilities
 {

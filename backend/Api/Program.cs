@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
+﻿using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Autofac.Extensions.DependencyInjection;
@@ -12,7 +10,6 @@ namespace YouFoos.Api
     /// <summary>
     /// The main class for the YouFoos API.
     /// </summary>
-    [ExcludeFromCodeCoverage]
     public class Program
     {
         /// <summary>
@@ -20,7 +17,6 @@ namespace YouFoos.Api
         /// </summary>
         public static void Main(string[] args)
         {
-            Console.WriteLine("Starting application...");
             CreateWebHostBuilder(args).Build().Run();
         }
 
@@ -31,19 +27,24 @@ namespace YouFoos.Api
         {
             return Host.CreateDefaultBuilder(args)
                 .UseServiceProviderFactory(new AutofacServiceProviderFactory())
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseKestrel();
-                    webBuilder.UseContentRoot(Directory.GetCurrentDirectory());
+                .UseSerilog(ConfigureSerilog)
+                .ConfigureWebHostDefaults(ConfigureWebHost);
+        }
 
-                    webBuilder.UseSerilog((hostingContext, loggerConfiguration) => loggerConfiguration
-                        .ReadFrom.Configuration(hostingContext.Configuration)
-                        .Enrich.FromLogContext()
-                        .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
-                        .MinimumLevel.Override("System", LogEventLevel.Warning));
+        private static void ConfigureWebHost(IWebHostBuilder webBuilder)
+        {
+            webBuilder.UseKestrel();
+            webBuilder.UseContentRoot(Directory.GetCurrentDirectory());
+            webBuilder.UseStartup<Startup>();
+        }
 
-                    webBuilder.UseStartup<Startup>();
-                });
+        private static void ConfigureSerilog(HostBuilderContext hostingContext, LoggerConfiguration loggerConfiguration)
+        {
+            loggerConfiguration
+                .ReadFrom.Configuration(hostingContext.Configuration)
+                .Enrich.FromLogContext()
+                .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+                .MinimumLevel.Override("System", LogEventLevel.Warning);
         }
     }
 }

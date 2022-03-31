@@ -4,7 +4,7 @@ using Moq;
 using Xunit;
 using YouFoos.DataAccess.Entities;
 using YouFoos.DataAccess.Repositories;
-using YouFoos.DataAccess.SharedTestUtils.TestData;
+using YouFoos.TestData;
 using YouFoos.StatisticsService.Services;
 
 namespace YouFoos.StatisticsService.Tests.Integration.Services

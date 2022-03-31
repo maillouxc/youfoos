@@ -2,10 +2,11 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using YouFoos.DataAccess;
 using YouFoos.DataAccess.Entities.Account;
 using YouFoos.DataAccess.Repositories;
 
-namespace YouFoos.DataAccess.SharedTestUtils.TestData
+namespace YouFoos.TestData
 {
     [ExcludeFromCodeCoverage]
     public static class TestCredentials

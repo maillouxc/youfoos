@@ -11,8 +11,9 @@ namespace YouFoos.Api.Services.Authentication
         /// Sends a password reset code to the user with the given email address.
         /// </summary>
         /// <remarks>
-        /// This contract does not guarantee that the code will be sent via email - the email address is used merely
-        /// to look up the user. The reset code could theoretically be sent via some other means, such as SMS.
+        /// Note that implementations of this interface need not send the code via email.
+        /// We pass email instead of user ID here in order to avoid having to make a second database lookup.
+        /// If the user already has an existing, non-expired reset code - we will resend it again instead of issuing a new one.
         /// </remarks>
         /// <param name="email">The email address of the user to send the reset code to.</param>
         Task SendResetCodeToUser(string email);

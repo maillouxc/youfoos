@@ -5,7 +5,7 @@ using Moq;
 using Xunit;
 using YouFoos.DataAccess.Entities;
 using YouFoos.DataAccess.Repositories;
-using YouFoos.SharedLibrary.Exceptions;
+using YouFoos.Exceptions;
 using YouFoos.GameEventsService.Services;
 
 namespace YouFoos.GameEventsService.Tests.Unit.Services

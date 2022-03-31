@@ -1,4 +1,6 @@
-﻿namespace YouFoos.GameEventsService.Utilities
+﻿using System;
+
+namespace YouFoos.SharedLibrary.Utilities
 {
     /// <summary>
     /// Byte arrays are not classes/objects, so they cannot have extension methods, unfortunately.
@@ -8,8 +10,15 @@
     /// </summary>
     public static class ByteArrayUtils
     {
+        /// <summary>
+        /// Rotates the provided byte array to the left by one bit.
+        /// </summary>
+        /// <exception cref="ArgumentNullException">If the provided byte array is null.</exception>
         public static void ShiftLeft(byte[] byteArray)
         {
+            if (byteArray == null)
+                throw new ArgumentNullException(nameof(byteArray));
+
             // Work from left to right.
             for (int i = 0; i < byteArray.Length; i++)
             {

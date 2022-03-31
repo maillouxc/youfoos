@@ -1,11 +1,9 @@
 using System;
-using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json;
 using YouFoos.DataAccess.Entities.Enums;
 
 namespace YouFoos.GameEventsService.Messages
 {
-    [ExcludeFromCodeCoverage]
     public class GoalScoredMessage
     {
         [JsonProperty("type")]

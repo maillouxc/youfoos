@@ -32,7 +32,7 @@ namespace YouFoos.Api
         /// <summary>
         /// This method gets called by the runtime - use it to configure the HTTP request pipeline.
         /// </summary>
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment _)
         {
             app.UseRouting();
             app.ConfigureCustomSwaggerUi();
@@ -51,9 +51,9 @@ namespace YouFoos.Api
         /// </summary>
         public void ConfigureServices(IServiceCollection services)
         {
-            DisableCors(services);
             LoadOptionsForDiFromAppSettingsJson(services);
 
+            services.ConfigureCors();
             services.ConfigureJwtAuthentication(Configuration);
             services.ConfigureSwagger().AddSwaggerGenNewtonsoftSupport();
             services.AddControllersWithViews().AddNewtonsoftJson();
@@ -70,19 +70,6 @@ namespace YouFoos.Api
         public void ConfigureContainer(ContainerBuilder builder)
         {
             DiRegistrations.RegisterStuffForDependencyInjection(builder);
-        }
-
-        private static void DisableCors(IServiceCollection services)
-        {
-            services.AddCors(options =>
-            {
-                options.AddPolicy("AllowAll", builder =>
-                {
-                    builder.AllowAnyOrigin();
-                    builder.AllowAnyHeader();
-                    builder.AllowAnyMethod();
-                });
-            });
         }
 
         private void LoadOptionsForDiFromAppSettingsJson(IServiceCollection services)

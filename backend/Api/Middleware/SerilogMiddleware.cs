@@ -10,25 +10,22 @@ using Serilog.Events;
 namespace YouFoos.Api.Middleware
 {
     /// <summary>
-    /// This middleware is used to log better information about network requests made using serilog.
+    /// This middleware is used to log information about all API requests.
     /// </summary>
-    /// <remarks>
-    /// Inspired by the article found at blog.getseq.net/smart-logging-middleware-for-asp-net-core/
-    /// </remarks>
     [ExcludeFromCodeCoverage]
     public class SerilogMiddleware
     {
         private const string MessageTemplate = "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms";
 
-        private static readonly ILogger Log = Serilog.Log.Logger;
-
+        private readonly ILogger _logger;
         private readonly RequestDelegate _next;
 
         /// <summary>
         /// Constructor.
         /// </summary>
-        public SerilogMiddleware(RequestDelegate next)
+        public SerilogMiddleware(ILogger logger, RequestDelegate next)
         {
+            _logger = logger;
             _next = next ?? throw new ArgumentNullException(nameof(next));
         }
 
@@ -45,49 +42,54 @@ namespace YouFoos.Api.Middleware
                 await _next(httpContext);
                 stopwatch.Stop();
 
-                // HTTP 500 responses are errors, but 200, 300, and 400 responses are normal behavior
+                // HTTP 500 responses are errors, but 100, 200, 300, and 400 responses are normal behavior.
                 var statusCode = httpContext.Response?.StatusCode;
                 var level = statusCode >= 500 ? LogEventLevel.Error : LogEventLevel.Information;
 
-                var log = level == LogEventLevel.Error ? LogForErrorContext(httpContext) : Log;
-                log.Write(level, 
-                          MessageTemplate, 
-                          httpContext.Request.Method, 
-                          httpContext.Request.Path, 
-                          statusCode, 
-                          stopwatch.Elapsed.TotalMilliseconds);
+                var logger = level == LogEventLevel.Error ? LogForErrorContext(httpContext, _logger) : _logger;
+                
+                logger.Write(
+                    level, 
+                    MessageTemplate, 
+                    httpContext.Request.Method, 
+                    httpContext.Request.Path, 
+                    statusCode, 
+                    stopwatch.Elapsed.TotalMilliseconds
+                );
             }
             // This try block never catches anything because `LogException()` returns false.
-            catch (Exception ex) when (LogException(httpContext, stopwatch, ex)) { }
+            // It's just a useful way to log exceptions without unwinding the call stack.
+            catch (Exception ex) when (LogException(httpContext, stopwatch, ex, _logger)) { }
         }
 
-        private static bool LogException(HttpContext httpContext, Stopwatch stopwatch, Exception ex)
+        private static bool LogException(HttpContext httpContext, Stopwatch stopwatch, Exception ex, ILogger logger)
         {
             stopwatch.Stop();
 
-            LogForErrorContext(httpContext)
-                .Error(ex, 
-                       MessageTemplate, 
-                       httpContext.Request.Method, 
-                       httpContext.Request.Path, 
-                       500,
-                       stopwatch.Elapsed.TotalMilliseconds);
+            LogForErrorContext(httpContext, logger).Error(
+                ex, 
+                MessageTemplate, 
+                httpContext.Request.Method, 
+                httpContext.Request.Path, 
+                500,
+                stopwatch.Elapsed.TotalMilliseconds
+            );
 
             return false;
         }
 
-        private static ILogger LogForErrorContext(HttpContext httpContext)
+        private static ILogger LogForErrorContext(HttpContext httpContext, ILogger logger)
         {
             var request = httpContext.Request;
 
-            var result = Log
+            var result = logger
                 .ForContext("RequestHeaders", 
                             request.Headers.ToDictionary(h => h.Key, h => h.Value.ToString()),
                             destructureObjects: true)
                 .ForContext("RequestHost", request.Host)
                 .ForContext("RequestProtocol", request.Protocol);
 
-            return result;
+            return logger;
         }
     }
 }

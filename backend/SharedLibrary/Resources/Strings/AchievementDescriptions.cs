@@ -1,5 +1,8 @@
 ﻿namespace YouFoos.SharedLibrary.Resources.Strings
 {
+    /// <summary>
+    /// The text descriptions of all achievements in the YouFoos system.
+    /// </summary>
     public static class AchievementDescriptions
     {
         public static readonly string LookMom = "Make it into the hall of fame.";

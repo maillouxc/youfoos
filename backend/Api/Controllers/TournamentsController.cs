@@ -4,10 +4,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using YouFoos.Api.Dtos;
-using YouFoos.Api.Exceptions;
+using YouFoos.Exceptions;
 using YouFoos.Api.Services;
 using YouFoos.DataAccess.Entities;
-using YouFoos.SharedLibrary.Exceptions;
 
 namespace YouFoos.Api.Controllers
 {

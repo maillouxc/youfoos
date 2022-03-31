@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Autofac;
+﻿using Autofac;
 using YouFoos.Api.Services;
 using YouFoos.Api.Services.Authentication;
 using YouFoos.Api.Services.Users;
@@ -9,7 +8,6 @@ namespace YouFoos.Api.Config
     /// <summary>
     /// This class simply holds a static method to configure Autofac DI registrations.
     /// </summary>
-    [ExcludeFromCodeCoverage]
     public class DiRegistrations
     {
         /// <summary>
@@ -21,9 +19,6 @@ namespace YouFoos.Api.Config
             RegisterRepositoriesForDependencyInjection(builder);
         }
 
-        /// <summary>
-        /// This method is where we need to register our service classes for dependency injection with Autofac.
-        /// </summary>
         private static void RegisterServicesForDependencyInjection(ContainerBuilder builder)
         {
             builder.RegisterType<Authenticator>().As<IAuthenticator>();
@@ -41,11 +36,6 @@ namespace YouFoos.Api.Config
             builder.RegisterType<TournamentsService>().As<ITournamentsService>();
         }
 
-        /// <summary>
-        /// This function is just a wrapper for the DataAccess method with the same
-        /// name. It exists only to clean up the code in Startup.cs, and keep a more
-        /// uniform interface. The startup class shouldn't need to know about the DataAccess classes.
-        /// </summary>
         private static void RegisterRepositoriesForDependencyInjection(ContainerBuilder builder)
         {
             DataAccess.Config.AutofacDiRegistrations.RegisterRepositoriesForDependencyInjection(builder);

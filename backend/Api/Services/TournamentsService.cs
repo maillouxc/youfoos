@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using YouFoos.Api.Dtos;
-using YouFoos.Api.Exceptions;
+using YouFoos.Exceptions;
 using YouFoos.DataAccess.Entities;
 using YouFoos.DataAccess.Entities.Account;
 using YouFoos.DataAccess.Entities.Tournaments;
 using YouFoos.DataAccess.Repositories;
-using YouFoos.SharedLibrary.Exceptions;
 
 namespace YouFoos.Api.Services
 {

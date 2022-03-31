@@ -1,11 +1,8 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace YouFoos.Api.Config
+﻿namespace YouFoos.Api.Config
 {
     /// <summary>
-    /// Strongly typed settings object containing configuration values for sending emails.
+    /// The configuration settings that YouFoos uses to send emails to users.
     /// </summary>
-    [ExcludeFromCodeCoverage]
     public class EmailSettings
     {
         /// <summary>

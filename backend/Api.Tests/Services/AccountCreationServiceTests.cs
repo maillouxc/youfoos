@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Moq;
 using Xunit;
 using YouFoos.Api.Dtos.Account;
-using YouFoos.Api.Exceptions;
+using YouFoos.Exceptions;
 using YouFoos.Api.Services;
 using YouFoos.Api.Services.Users;
 using YouFoos.DataAccess.Entities.Account;

@@ -15,8 +15,11 @@ namespace YouFoos.SharedLibrary.Extensions
         /// 
         /// This method uses a non-secure random number generator and is not suitable for cryptographic purposes.
         /// </summary>
+        /// <exception cref="ArgumentNullException">If the provided list to shuffle is null.</exception>
         public static void Shuffle<T>(this IList<T> list)
         {
+            if (list == null) throw new ArgumentNullException(nameof(list));
+
             int n = list.Count;
             while (n > 1)
             {

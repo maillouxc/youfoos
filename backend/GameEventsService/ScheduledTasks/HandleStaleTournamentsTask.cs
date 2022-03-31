@@ -8,6 +8,8 @@ using YouFoos.DataAccess.Repositories;
 
 namespace YouFoos.GameEventsService.ScheduledTasks
 {
+    // TODO finish this file documentation
+
     public class HandleStaleTournamentsTask : IJob
     {
         private readonly ITournamentsRepository _tournamentsRepository;

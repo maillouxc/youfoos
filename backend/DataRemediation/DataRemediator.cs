@@ -10,6 +10,12 @@ using YouFoos.StatisticsService.Services;
 
 namespace YouFoos.DataRemediation
 {
+    /// <summary>
+    /// This is a simple command line utility that can be used to rebuild the YouFoos database from
+    /// from the game events. It is useful if a bug is discovered in stats calculation code or elsewhere
+    /// in the processing pipeline, or if we have added new stats to the system and wish to retroactively
+    /// track them for past games played.
+    /// </summary>
     public class DataRemediator
     {
         private readonly IMongoContext _dbContext;
@@ -19,6 +25,9 @@ namespace YouFoos.DataRemediation
         private readonly IAccoladesCalculator _accoladesCalculator;
         private readonly IAchievementUnlockService _achievementUnlockService;
 
+        /// <summary>
+        /// Constructor.
+        /// </summary>
         public DataRemediator(IMongoContext mongoContext,
                               IGamesRepository gamesRepository,
                               IUsersRepository usersRepository,
@@ -34,6 +43,9 @@ namespace YouFoos.DataRemediation
             _achievementUnlockService = achievementUnlockService;
         }
 
+        /// <summary>
+        /// Runs the main logic of the utility - recalculates all user stats, accolades, and achievements.
+        /// </summary>
         public async Task RemediateData()
         {
             var games = LoadAllGames().Result;
@@ -47,6 +59,9 @@ namespace YouFoos.DataRemediation
             }
         }
 
+        /// <summary>
+        /// Resets all player ranks to their intial values. This is necessary before recalculating stats.
+        /// </summary>
         public async Task ResetAllPlayerRanks()
         {
             var allUsers = await _usersRepository.GetAllUsers(pageSize: int.MaxValue, page: 0);
@@ -58,6 +73,9 @@ namespace YouFoos.DataRemediation
             }
         }
 
+        /// <summary>
+        /// Prepares the database for the remediation process by dropping collections that will be rebuilt.
+        /// </summary>
         public async Task DropCollectionsThatWillBeRebuilt()
         {
             await _dbContext.GetCollection<UserStats>("stats").DeleteManyAsync(_ => true);

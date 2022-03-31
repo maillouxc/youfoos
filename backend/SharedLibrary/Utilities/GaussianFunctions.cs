@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace YouFoos.StatisticsService.Utils
+namespace YouFoos.SharedLibrary.Utilities
 {
     /// <summary>
     /// Contains several utility functions for calculating values related to gaussian distributions.

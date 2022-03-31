@@ -7,7 +7,7 @@ using YouFoos.DataAccess.Entities;
 using YouFoos.DataAccess.Entities.Enums;
 using YouFoos.DataAccess.Repositories;
 using YouFoos.GameEventsService.Messages;
-using YouFoos.SharedLibrary.Exceptions;
+using YouFoos.Exceptions;
 
 namespace YouFoos.GameEventsService.Services
 {

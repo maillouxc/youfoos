@@ -16,6 +16,7 @@ namespace YouFoos.Api.Services.Authentication
         private const int PasswordResetCodeExpirationMinutes = 10;
         private const int PasswordResetCodeLength = 10;
 
+        private readonly ILogger _logger;
         private readonly IEmailSender _emailSender;
         private readonly IPasswordResetCodeRepository _passwordResetCodeRepository;
         private readonly IAccountCredentialsRepository _accountCredentialsRepository;
@@ -24,44 +25,41 @@ namespace YouFoos.Api.Services.Authentication
         /// Constructor.
         /// </summary>
         public PasswordChangeService(
-            IEmailSender emailSender, 
+            ILogger logger,
+            IEmailSender emailSender,
             IPasswordResetCodeRepository passwordResetCodeRepository,
             IAccountCredentialsRepository accountCredentialsRepository)
         {
+            _logger = logger;
             _emailSender = emailSender;
             _passwordResetCodeRepository = passwordResetCodeRepository;
             _accountCredentialsRepository = accountCredentialsRepository;
         }
 
         /// <summary>
-        /// Given a user's email address, emails them a password reset code.
-        /// </summary>
-        /// <remarks>
-        /// If the user already has an existing valid reset code that is not expired, the same code is resent to them
-        /// again. Otherwise, a new code is generated and sent.
-        ///
-        /// If the provided email is null or empty, a NullReferenceException is thrown.
+        /// Concrete implementation of <see cref="IPasswordChangeService.SendResetCodeToUser(string)"/>.
         /// 
-        /// If the user credentials set for the given email does not exist, no indication is given - the method simply
-        /// returns like normal, but does not send an email or generate a code. We don't want people (or robots) to be
-        /// able to easily probe our service for valid emails, as this would be a security risk.
-        /// </remarks>
+        /// This implementation delivers reset codes via email.
+        /// If a user with the given email address does not exist, this method will still return normally,
+        /// which prevents users from fishing the system for valid email addresses by passing emails until it works.
+        /// </summary>
         public async Task SendResetCodeToUser(string email)
         {
-            if (string.IsNullOrEmpty(email)) throw new NullReferenceException("Email cannot be null or empty.");
+            if (string.IsNullOrEmpty(email)) throw new ArgumentNullException(nameof(email), "Value cannot be null or empty.");
 
             // If the user with the given email does not exist, just return like normal - give no indication
             var foundCredentials = await _accountCredentialsRepository.GetAccountCredentialsForUserWithEmail(email);
             if (foundCredentials == null)
             {
-                Log.Logger.Information("Password reset requested for email {@email} but user does not exist.");
+                _logger.Information("Password reset requested for user with email {@email} but user does not exist.", email);
                 return;
             }
 
             var existingCode = await _passwordResetCodeRepository.GetResetCodeForUserWithEmail(email);
+
             if (existingCode == null)
             {
-                // They didn't have an outstanding reset request yet, so we can generate a new code and send it
+                // They didn't have an outstanding reset request yet, so we can generate a new code and send it:
                 string code = AlphanumericStringGenerator.GetSecureRandomAlphanumericString(PasswordResetCodeLength);
                 var resetCode = new PasswordResetCode(email, code);
                 await _passwordResetCodeRepository.InsertOne(resetCode);

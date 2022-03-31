@@ -6,6 +6,7 @@ namespace YouFoos.GameEventsService.Services
     public interface IRfidToUserAccountResolverService
     {
         Task<User> GetUserWithRfid(string rfidBytes);
+
         Task<User> GetUserWithRfidOrCreateNewAnonymousUser(string rfidBytes);
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29201.188
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Api\Api.csproj", "{02CBD33C-B8A0-4392-AC21-C6403F08A588}"
 EndProject
@@ -24,6 +24,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharedLibrary", "SharedLibrary\SharedLibrary.csproj", "{3E2C1551-31D2-43A0-B1E4-24EC724A1E44}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataRemediation", "DataRemediation\DataRemediation.csproj", "{A3FF686B-7A7D-43BC-A0EE-A069F81BC4A4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharedLibrary.Tests.Unit", "SharedLibrary.Tests.Unit\SharedLibrary.Tests.Unit.csproj", "{210C1CAA-FE69-409A-A1A5-ABAA78E47507}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{A3FF686B-7A7D-43BC-A0EE-A069F81BC4A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3FF686B-7A7D-43BC-A0EE-A069F81BC4A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3FF686B-7A7D-43BC-A0EE-A069F81BC4A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{210C1CAA-FE69-409A-A1A5-ABAA78E47507}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{210C1CAA-FE69-409A-A1A5-ABAA78E47507}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{210C1CAA-FE69-409A-A1A5-ABAA78E47507}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{210C1CAA-FE69-409A-A1A5-ABAA78E47507}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

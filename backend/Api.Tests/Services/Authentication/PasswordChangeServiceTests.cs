@@ -8,6 +8,7 @@ using YouFoos.Api.Services;
 using YouFoos.Api.Services.Authentication;
 using YouFoos.DataAccess.Entities.Account;
 using YouFoos.DataAccess.Repositories;
+using Serilog;
 
 namespace YouFoos.Api.Tests.Unit.Services.Authentication
 {
@@ -16,27 +17,28 @@ namespace YouFoos.Api.Tests.Unit.Services.Authentication
     {
         private readonly PasswordChangeService _service;
 
-        private readonly Mock<IPasswordResetCodeRepository> _mockResetCodeRepo = new Mock<IPasswordResetCodeRepository>();
-        private readonly Mock<IAccountCredentialsRepository> _mockCredentialsRepo = new Mock<IAccountCredentialsRepository>();
-        private readonly Mock<IEmailSender> _mockEmailSender = new Mock<IEmailSender>();
+        private readonly Mock<ILogger> _mockLogger = new();
+        private readonly Mock<IPasswordResetCodeRepository> _mockResetCodeRepo = new();
+        private readonly Mock<IAccountCredentialsRepository> _mockCredentialsRepo = new();
+        private readonly Mock<IEmailSender> _mockEmailSender = new();
 
-        private readonly PasswordResetCode _validResetCode = new PasswordResetCode("t1@gmail.com", "1234567890");
-        private readonly PasswordResetCode _expiredResetCode = new PasswordResetCode("t2@gmail.com", "12345567890")
+        private readonly PasswordResetCode _validResetCode = new("t1@gmail.com", "1234567890");
+        private readonly PasswordResetCode _expiredResetCode = new("t2@gmail.com", "12345567890")
         {
             Created = DateTime.UtcNow.Subtract(new TimeSpan(hours: 0, minutes: 30, seconds: 0)),
         };
 
-        private readonly AccountCredentials _testCredentials = new AccountCredentials()
+        private readonly AccountCredentials _testCredentials = new()
         {
             Email = "t1@gmail.com",
             HashedPassword = "doesntmatterwhatweusehere"
         };
-        private readonly AccountCredentials _testCredentials2 = new AccountCredentials()
+        private readonly AccountCredentials _testCredentials2 = new()
         {
             Email = "t2@gmail.com",
             HashedPassword = "doesntmatterwhatweusehere"
         };
-        private readonly AccountCredentials _testCredentials3 = new AccountCredentials()
+        private readonly AccountCredentials _testCredentials3 = new()
         {
             Email = "t3@gmail.com",
             HashedPassword = "doesntmatterwhatweusehere"
@@ -58,7 +60,8 @@ namespace YouFoos.Api.Tests.Unit.Services.Authentication
                                                    .ReturnsAsync(_testCredentials3);
 
             // Init the service with the mock objects
-            _service = new PasswordChangeService(_mockEmailSender.Object,
+            _service = new PasswordChangeService(_mockLogger.Object,
+                                                 _mockEmailSender.Object,
                                                  _mockResetCodeRepo.Object,
                                                  _mockCredentialsRepo.Object);
         }

@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
+using YouFoos.DataAccess;
 using YouFoos.DataAccess.Entities.Stats;
 using YouFoos.DataAccess.Repositories;
 
-namespace YouFoos.DataAccess.SharedTestUtils.TestData
+namespace YouFoos.TestData
 {
     [ExcludeFromCodeCoverage]
     public class TestStats

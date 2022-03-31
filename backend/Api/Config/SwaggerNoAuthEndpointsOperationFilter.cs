@@ -34,11 +34,11 @@ namespace YouFoos.Api.Config
 
             operation.Security = new List<OpenApiSecurityRequirement>
             {
-                new OpenApiSecurityRequirement { [jwtbearerScheme] = new string []{} }
+                new OpenApiSecurityRequirement { [jwtbearerScheme] = System.Array.Empty<string>() }
             };
         }
 
-        private bool DoesRouteRequireAuth(MethodInfo context)
+        private static bool DoesRouteRequireAuth(MethodInfo context)
         {
             bool controllerHasAuthTag = context.DeclaringType.GetCustomAttributes(true).OfType<AuthorizeAttribute>().Any();
             bool routeHasAuthTag = context.GetCustomAttributes(true).OfType<AuthorizeAttribute>().Any();

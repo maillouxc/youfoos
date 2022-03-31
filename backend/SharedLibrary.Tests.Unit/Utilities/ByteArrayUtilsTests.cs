@@ -1,8 +1,8 @@
 ﻿using Xunit;
 using System.Diagnostics.CodeAnalysis;
-using YouFoos.GameEventsService.Utilities;
+using YouFoos.SharedLibrary.Utilities;
 
-namespace YouFoos.GameEventsService.Tests.Unit.Utilities
+namespace YouFoos.SharedLibrary.Tests.Unit.Utilities
 {
     [ExcludeFromCodeCoverage]
     public class ByteArrayUtilsTests

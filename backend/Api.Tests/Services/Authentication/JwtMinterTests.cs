@@ -6,7 +6,7 @@ using Microsoft.Extensions.Options;
 using Xunit;
 using YouFoos.Api.Services.Authentication;
 using YouFoos.Api.Config;
-using YouFoos.DataAccess.SharedTestUtils.TestData;
+using YouFoos.TestData;
 
 namespace YouFoos.Api.Tests.Unit.Services.Authentication
 {

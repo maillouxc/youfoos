@@ -1,10 +1,8 @@
 using System;
-using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json;
 
 namespace YouFoos.GameEventsService.Messages
 {
-    [ExcludeFromCodeCoverage]
     public class GoalUndoMessage
     {
         [JsonProperty("type")]

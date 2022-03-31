@@ -1,5 +1,5 @@
 ﻿using YouFoos.DataAccess.Entities.Stats;
-using YouFoos.DataAccess.SharedTestUtils.TestData;
+using YouFoos.TestData;
 using YouFoos.StatisticsService.Services;
 using System.Diagnostics.CodeAnalysis;
 using Xunit;

@@ -1,7 +1,7 @@
 ﻿using System;
 using YouFoos.DataAccess.Entities.Account;
 using YouFoos.DataAccess.Entities.Stats;
-using YouFoos.StatisticsService.Utils;
+using YouFoos.SharedLibrary.Utilities;
 
 namespace YouFoos.StatisticsService.Services
 {

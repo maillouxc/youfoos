@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Serilog;
 using YouFoos.Api.Dtos.Account;
 using YouFoos.Api.Dtos;
-using YouFoos.Api.Exceptions;
+using YouFoos.Exceptions;
 using YouFoos.Api.Services.Users;
 using YouFoos.DataAccess.Entities.Account;
 

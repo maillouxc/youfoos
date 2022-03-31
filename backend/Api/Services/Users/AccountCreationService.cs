@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Serilog;
 using YouFoos.Api.Dtos.Account;
-using YouFoos.Api.Exceptions;
+using YouFoos.Exceptions;
 using YouFoos.DataAccess.Entities.Account;
 using YouFoos.DataAccess.Repositories;
 

@@ -1,8 +1,8 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace YouFoos.SharedLibrary.Resources.Strings
+﻿namespace YouFoos.SharedLibrary.Resources.Strings
 {
-    [ExcludeFromCodeCoverage]
+    /// <summary>
+    /// The names of all accolades in the YouFoos system.
+    /// </summary>
     public static class AccoladeTitles
     {
         // Positive connotation player specific accolades

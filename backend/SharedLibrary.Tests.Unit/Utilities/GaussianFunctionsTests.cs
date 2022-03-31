@@ -1,8 +1,8 @@
-﻿using YouFoos.StatisticsService.Utils;
+﻿using YouFoos.SharedLibrary.Utilities;
 using System.Diagnostics.CodeAnalysis;
 using Xunit;
 
-namespace YouFoos.StatisticsService.Tests.Unit.Utils
+namespace YouFoos.SharedLibrary.Tests.Unit.Utilities
 {
     [ExcludeFromCodeCoverage]
     public class GaussianFunctionsTests

@@ -2,10 +2,10 @@
 using System.Threading.Tasks;
 using Moq;
 using Xunit;
-using YouFoos.Api.Exceptions;
+using YouFoos.Exceptions;
 using YouFoos.Api.Services.Users;
 using YouFoos.DataAccess.Repositories;
-using YouFoos.DataAccess.SharedTestUtils.TestData;
+using YouFoos.TestData;
 
 namespace YouFoos.Api.Tests.Unit.Services
 {
