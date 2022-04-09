@@ -25,7 +25,7 @@
     "braces": "^3.0.2",
     "core-js": "^3.2.1",
     "jwt-decode": "^2.2.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "ngx-moment": "^3.4.0",
     "rxjs": "^6.5.5",
     "rxjs-take-while-inclusive": "^2.1.0",
